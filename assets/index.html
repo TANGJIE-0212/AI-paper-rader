@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 论文雷达 - 每周精选论文</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #0b1020;
+            --bg-accent: #11182e;
+            --panel: rgba(12, 18, 34, 0.9);
+            --panel-strong: #11182b;
+            --panel-muted: rgba(255, 255, 255, 0.028);
+            --ink: #edf3ff;
+            --muted: #97a6c4;
+            --line: rgba(173, 191, 230, 0.12);
+            --line-strong: rgba(173, 191, 230, 0.22);
+            --brand: #79a6ff;
+            --brand-soft: rgba(121, 166, 255, 0.12);
+            --brand-strong: #8fd0ff;
+            --green-soft: #16281f;
+            --amber-soft: #2a2216;
+            --rose-soft: #251822;
+            --lavender-soft: #191d31;
+            --shadow: 0 30px 90px rgba(2, 6, 18, 0.42);
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(76, 115, 255, 0.2), transparent 26%),
+                radial-gradient(circle at bottom right, rgba(0, 208, 255, 0.12), transparent 24%),
+                linear-gradient(180deg, #09101f 0%, var(--bg) 100%);
+            min-height: 100vh;
+            padding: 24px;
+            color: var(--ink);
+            position: relative;
+            overflow-x: hidden;
+            color-scheme: dark;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            inset: auto;
+            width: 38vw;
+            height: 38vw;
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.42;
+            pointer-events: none;
+            z-index: -2;
+            animation: drift 16s ease-in-out infinite;
+        }
+
+        body::before {
+            top: -10vw;
+            left: -8vw;
+            background: radial-gradient(circle, rgba(85, 124, 255, 0.24), rgba(85, 124, 255, 0) 68%);
+        }
+
+        body::after {
+            right: -12vw;
+            bottom: -14vw;
+            background: radial-gradient(circle, rgba(0, 204, 255, 0.16), rgba(0, 204, 255, 0) 68%);
+            animation-delay: -8s;
+        }
+
+        body .page-grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.08;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        .container {
+            max-width: 1520px;
+            margin: 0 auto;
+            background: var(--panel);
+            border: 1px solid rgba(173, 191, 230, 0.12);
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(90, 91, 214, 0.35), transparent);
+            z-index: 3;
+        }
+
+        header {
+            background:
+                linear-gradient(135deg, rgba(121, 166, 255, 0.12), rgba(92, 122, 214, 0.04)),
+                linear-gradient(180deg, #10182d 0%, #0d1427 100%);
+            color: var(--ink);
+            padding: 34px 36px 24px;
+            border-bottom: 1px solid var(--line);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            inset: -18% auto auto 62%;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(121, 166, 255, 0.14), rgba(121, 166, 255, 0) 70%);
+            animation: pulseFloat 12s ease-in-out infinite;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            right: 42px;
+            top: 28px;
+            width: 180px;
+            height: 180px;
+            border-radius: 36px;
+            border: 1px solid rgba(121, 166, 255, 0.08);
+            transform: rotate(18deg);
+            opacity: 0.28;
+        }
+
+        header .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 88%);
+            pointer-events: none;
+        }
+
+        .header-toolbar {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 18px;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px;
+            border-radius: 999px;
+            border: 1px solid rgba(173, 191, 230, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+        }
+
+        .lang-switch button {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-switch button.active {
+            background: rgba(121, 166, 255, 0.16);
+            color: var(--ink);
+            box-shadow: inset 0 0 0 1px rgba(143, 208, 255, 0.12);
+        }
+
+        .lang-switch button:hover {
+            color: var(--ink);
+        }
+
+        header h1 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: clamp(2.6rem, 5vw, 4.3rem);
+            margin-bottom: 12px;
+            letter-spacing: -0.07em;
+            font-weight: 600;
+            line-height: 0.98;
+        }
+
+        .hero-title-accent {
+            display: block;
+            background: linear-gradient(180deg, #ffffff 0%, #b8d1ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: riseIn 0.7s cubic-bezier(.2,.8,.2,1) forwards;
+        }
+
+        .title-word + .title-word {
+            margin-left: 0.18em;
+        }
+
+        .hero-kicker {
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            font-size: 0.74rem;
+            color: var(--brand);
+            margin-bottom: 12px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: var(--muted);
+            max-width: 980px;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .hero-shell {
+            position: relative;
+            z-index: 1;
+            display: block;
+        }
+
+        .hero-copy {
+            max-width: 100%;
+        }
+
+        .hero-line {
+            margin-top: 14px;
+            width: min(100%, 1120px);
+            height: 1px;
+            background: linear-gradient(90deg, rgba(121, 166, 255, 0.55), rgba(121, 166, 255, 0.08), transparent);
+        }
+
+        .signal-card {
+            background: linear-gradient(180deg, rgba(18, 27, 49, 0.9), rgba(12, 18, 34, 0.82));
+            border: 1px solid rgba(173, 191, 230, 0.12);
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 22px 44px rgba(2, 6, 18, 0.24);
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+            min-height: 100%;
+        }
+
+        .signal-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(121, 166, 255, 0.1), transparent 45%, rgba(0, 204, 255, 0.08));
+            pointer-events: none;
+        }
+
+        .signal-label {
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.72rem;
+            color: var(--brand);
+            margin-bottom: 18px;
+        }
+
+        .signal-card h2 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.36rem;
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+        }
+
+        .signal-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.94rem;
+            margin-bottom: 18px;
+        }
+
+        .signal-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .signal-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(173, 191, 230, 0.1);
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        .signal-item .dim-name {
+            font-size: 0.92rem;
+            color: #dce8ff;
+        }
+
+        .signal-item .dim-count {
+            color: var(--brand);
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .meta-pill {
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.05);
+            color: #dce8ff;
+            font-size: 0.88rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .meta-pill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, transparent 15%, rgba(255,255,255,0.34) 50%, transparent 85%);
+            transform: translateX(-120%);
+            transition: transform 0.6s ease;
+        }
+
+        .meta-pill:hover::after {
+            transform: translateX(120%);
+        }
+
+        .main-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .sidebar {
+            width: 300px;
+            padding: 28px 20px 28px 28px;
+            border-right: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            position: sticky;
+            top: 0;
+        }
+
+        .sidebar h3 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+
+        .dimension-nav {
+            list-style: none;
+        }
+
+        .dimension-nav li {
+            margin-bottom: 12px;
+        }
+
+        .dimension-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 14px;
+            text-decoration: none;
+            color: #b7c4de;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+            border-radius: 18px;
+            transition: all 0.2s ease;
+            font-size: 0.92em;
+            cursor: pointer;
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        .dimension-nav a:hover, .dimension-nav a.active {
+            background: rgba(255,255,255,0.06);
+            color: var(--ink);
+            border-color: var(--line-strong);
+            transform: translateX(4px);
+            box-shadow: 0 12px 24px rgba(2, 6, 18, 0.22);
+        }
+
+        .dimension-nav .icon {
+            margin-right: 10px;
+            font-size: 1.3em;
+        }
+
+        .dimension-nav .count {
+            margin-left: auto;
+            background: rgba(121, 166, 255, 0.1);
+            color: var(--brand);
+            padding: 3px 9px;
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+
+        .dimension-nav a:hover .count, .dimension-nav a.active .count {
+            background: var(--brand-soft);
+            color: var(--brand);
+        }
+
+        .content {
+            flex: 1;
+            padding: 30px 38px 44px;
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+        }
+
+        .view-tabs {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 16, 31, 0.88);
+            backdrop-filter: blur(18px);
+            z-index: 100;
+        }
+
+        .view-tabs button {
+            padding: 11px 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(173, 191, 230, 0.08);
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #c2d1eb;
+            transition: all 0.2s ease;
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        .view-tabs button.active {
+            color: var(--ink);
+            border-color: rgba(143, 208, 255, 0.22);
+            background: rgba(121, 166, 255, 0.1);
+            box-shadow: 0 8px 18px rgba(2, 6, 18, 0.18);
+        }
+
+        .view-tabs button:hover {
+            color: var(--ink);
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        .radar-container {
+            max-width: 560px;
+            margin: 18px auto;
+            padding: 26px;
+            border-radius: var(--radius-lg);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--line);
+        }
+
+        /* 雷达+时间线上下布局 */
+        .radartime-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .radartime-left {
+            width: 100%;
+        }
+
+        .radartime-right {
+            width: 100%;
+        }
+
+        .papers-grid {
+            display: grid;
+            gap: 22px;
+        }
+
+        .dimension-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--line);
+        }
+
+        .dimension-section:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .dimension-section-title {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.28rem;
+            color: var(--ink);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: -0.03em;
+        }
+
+        .section-count {
+            font-size: 0.8em;
+            color: #7f91b6;
+            font-weight: normal;
+        }
+
+        .paper-card {
+            background: rgba(255,255,255,0.035);
+            border: 1px solid var(--line);
+            border-radius: 26px;
+            padding: 28px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paper-card::before,
+        .strategy-card::before,
+        .new-product-card::before,
+        .timeline-paper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 44%, rgba(121, 166, 255, 0.08));
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        .paper-card:hover {
+            box-shadow: 0 24px 42px rgba(2, 6, 18, 0.26);
+            transform: translateY(-3px);
+            border-color: rgba(121, 166, 255, 0.28);
+        }
+
+        .paper-card:hover::before,
+        .strategy-card:hover::before,
+        .new-product-card:hover::before,
+        .timeline-paper:hover::before {
+            opacity: 1;
+        }
+
+        .paper-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .paper-icon {
+            font-size: 2.5em;
+            flex-shrink: 0;
+        }
+
+        .paper-title-block {
+            flex: 1;
+        }
+
+        .paper-title {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.4rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+            line-height: 1.35;
+            letter-spacing: -0.03em;
+        }
+
+        .paper-title a {
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .paper-title a:hover {
+            color: var(--brand);
+        }
+
+        .paper-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        .paper-likes {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 118, 157, 0.12);
+            color: #ff9fbc;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .paper-date {
+            color: var(--muted);
+            font-size: 0.85em;
+        }
+
+        .paper-dimension {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--line);
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 0.9em;
+            color: var(--muted);
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        .paper-blocks {
+            display: grid;
+            gap: 15px;
+        }
+
+        .info-block {
+            padding: 16px 18px;
+            border-radius: 16px;
+            border: 1px solid transparent;
+        }
+
+        .info-block.tech {
+            background: #122034;
+            border-color: rgba(121, 166, 255, 0.18);
+        }
+
+        .info-block.capability {
+            background: var(--lavender-soft);
+            border-color: rgba(138, 124, 255, 0.2);
+        }
+
+        .info-block.product {
+            background: var(--amber-soft);
+            border-color: rgba(255, 192, 97, 0.18);
+        }
+
+        .block-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink);
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        .block-content {
+            color: #c8d4ec;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-date {
+            width: 120px;
+            flex-shrink: 0;
+            font-weight: 600;
+            color: var(--brand);
+            font-size: 1.1em;
+        }
+
+        .timeline-content {
+            flex: 1;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid var(--line);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background: var(--brand);
+            border-radius: 50%;
+            border: 3px solid #0d1427;
+            box-shadow: 0 0 0 2px var(--brand);
+        }
+
+        .timeline-papers {
+            display: grid;
+            gap: 15px;
+        }
+
+        .timeline-paper {
+            background: rgba(255,255,255,0.035);
+            border: 1px solid var(--line);
+            padding: 15px;
+            border-radius: 16px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-paper:hover {
+            border-color: rgba(121, 166, 255, 0.22);
+            box-shadow: 0 12px 28px rgba(2, 6, 18, 0.24);
+        }
+
+        .timeline-paper-title {
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 5px;
+        }
+
+        .timeline-paper-title a {
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .timeline-paper-title a:hover {
+            color: var(--brand);
+        }
+
+        .timeline-paper-dimension {
+            display: inline-block;
+            background: rgba(121, 166, 255, 0.1);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            color: var(--brand);
+        }
+
+        /* ========== 融合版产品机会板样式 ========== */
+        .opp-fusion-section {
+            margin-bottom: 50px;
+        }
+
+        .opp-fusion-section-title {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.3rem;
+            color: var(--ink);
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.03em;
+        }
+
+        /* 战略卡片 */
+        .strategy-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .strategy-card {
+            border-radius: 22px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            box-shadow: 0 18px 32px rgba(2, 6, 18, 0.22);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 24px 40px rgba(2, 6, 18, 0.28);
+            border-color: rgba(121, 166, 255, 0.2);
+        }
+
+        .strategy-card.cashcow {
+            background: linear-gradient(180deg, #13281d 0%, #112018 100%);
+        }
+
+        .strategy-card.efficiency {
+            background: linear-gradient(180deg, #2b2115 0%, #221a12 100%);
+        }
+
+        .strategy-card.blueocean {
+            background: linear-gradient(180deg, #132036 0%, #101a2c 100%);
+        }
+
+        .strategy-card.special {
+            background: linear-gradient(180deg, #241728 0%, #1d1423 100%);
+        }
+
+        .strategy-card h4 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .strategy-card .observation {
+            font-size: 0.85em;
+            color: #c6d4ef;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .strategy-card .action {
+            font-size: 0.9em;
+            background: rgba(255,255,255,0.05);
+            padding: 12px 15px;
+            border-radius: 14px;
+            line-height: 1.6;
+            border: 1px solid rgba(173, 191, 230, 0.08);
+        }
+
+        .strategy-card .action strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* 新产品形态 */
+        .new-products {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .new-product-card {
+            background: rgba(255,255,255,0.035);
+            border-radius: 22px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 18px 34px rgba(2, 6, 18, 0.22);
+            border: 1px solid var(--line);
+            transition: all 0.2s ease;
+        }
+
+        .new-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 22px 40px rgba(2, 6, 18, 0.28);
+        }
+
+        .new-product-card .card-header {
+            background: linear-gradient(135deg, #131f35 0%, #0f1a2d 100%);
+            color: var(--ink);
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .new-product-card .card-header h4 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.14em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .new-product-card .card-header .trend-source {
+            font-size: 0.8em;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .new-product-card .card-body {
+            padding: 25px;
+        }
+
+        .new-product-card .description {
+            color: #c8d4ec;
+            line-height: 1.7;
+            margin-bottom: 18px;
+            font-size: 0.95em;
+        }
+
+        .new-product-card .products {
+            margin-bottom: 18px;
+        }
+
+        .new-product-card .products-label {
+            font-size: 0.8em;
+            color: var(--muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .new-product-card .products span {
+            display: inline-block;
+            background: rgba(103, 226, 170, 0.12);
+            color: #9de8c5;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 3px 6px 3px 0;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .new-product-card .related-papers {
+            padding-top: 15px;
+            border-top: 1px dashed var(--line);
+        }
+
+        .new-product-card .related-papers-label {
+            font-size: 0.8em;
+            color: var(--muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .new-product-card .paper-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .new-product-card .paper-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(121, 166, 255, 0.1);
+            color: var(--brand);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .new-product-card .paper-link:hover {
+            background: var(--brand);
+            color: #08101f;
+        }
+
+        /* 战略卡片引用 */
+        .strategy-card .related-papers {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(62, 49, 34, 0.08);
+        }
+
+        .strategy-card .related-papers-label {
+            font-size: 0.75em;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .strategy-card .paper-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .strategy-card .paper-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            background: rgba(121, 166, 255, 0.1);
+            color: var(--brand);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .strategy-card .paper-link:hover {
+            background: var(--brand);
+            color: #08101f;
+        }
+
+        .analysis-box {
+            margin-top: 40px;
+            padding: 24px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analysis-box::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--brand), rgba(208, 151, 77, 0.35));
+        }
+
+        .analysis-box h3 {
+            margin-bottom: 15px;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+        }
+
+        .analysis-box ul {
+            line-height: 2;
+            color: #bfd0ee;
+            padding-left: 20px;
+        }
+
+        .analysis-box li strong {
+            color: var(--ink);
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--brand);
+            text-decoration: none;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+
+        .github-link:hover {
+            text-decoration: underline;
+        }
+
+        .org-tag {
+            display: inline-block;
+            background: rgba(121, 166, 255, 0.1);
+            color: var(--brand);
+            font-size: 0.75em;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px) scale(0.985);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            will-change: opacity, transform;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .reveal[data-reveal="left"] {
+            transform: translateX(-22px);
+        }
+
+        .reveal[data-reveal="right"] {
+            transform: translateX(22px);
+        }
+
+        .reveal.is-visible[data-reveal="left"],
+        .reveal.is-visible[data-reveal="right"] {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 1080px) {
+            body {
+                padding: 14px;
+            }
+
+            .hero-shell {
+                display: block;
+            }
+
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--line);
+                position: static;
+            }
+
+            .content {
+                max-height: none;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .timeline-date {
+                width: auto;
+            }
+        }
+
+        @media (max-width: 720px) {
+            header {
+                padding: 30px 22px 22px;
+            }
+
+            .header-toolbar {
+                margin-bottom: 14px;
+            }
+
+            .signal-card {
+                padding: 18px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .view-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+
+            .paper-dimension {
+                position: static;
+                display: inline-flex;
+                margin-bottom: 14px;
+            }
+
+            .paper-header {
+                flex-direction: column;
+            }
+        }
+
+        @keyframes highlight {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); box-shadow: 0 16px 36px rgba(90, 91, 214, 0.16); }
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(2vw, -2vw, 0) scale(1.05); }
+        }
+
+        @keyframes pulseFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(18px) scale(1.04); }
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-grain"></div>
+    <div class="container">
+        <header>
+            <div class="hero-grid"></div>
+                <div class="header-toolbar">
+                    <div class="lang-switch" role="group" aria-label="Language switcher">
+                        <button id="langZh" class="active" onclick="setLanguage('zh')">中文</button>
+                        <button id="langEn" onclick="setLanguage('en')">English</button>
+                    </div>
+                </div>
+            <div class="hero-shell">
+                <div class="hero-copy">
+                        <div class="hero-kicker" id="heroKicker">每周情报 · 产品视角 · AI 前沿</div>
+                    <h1 id="heroTitle">AI 论文雷达</h1>
+                        <p class="hero-subtitle" id="heroSubtitle">追踪真正值得花时间理解的 AI 论文，把技术热点整理成更清晰的产品判断、能力地图和机会线索。</p>
+                    <div class="hero-line"></div>
+                    <div class="hero-meta">
+                        <span class="meta-pill" id="headerInfo">数据来源: Hugging Face Weekly Papers</span>
+                        <span class="meta-pill" id="paperCount">0 篇论文</span>
+                        <span class="meta-pill" id="dimensionCount">0 个活跃维度</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="view-tabs">
+              <button id="tabPapers" class="active" onclick="showView('papers')">📄 论文列表</button>
+              <button id="tabOpportunities" onclick="showView('opportunities')">💡 产品机会</button>
+              <button id="tabRadartime" onclick="showView('radartime')">📊 能力维度 + ⏰ 时间线</button>
+        </div>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <h3 id="sidebarTitle" style="cursor: pointer;" onclick="scrollToTop()">📄 全部论文</h3>
+                <ul class="dimension-nav" id="dimensionNav">
+                    <!-- 动态生成 -->
+                </ul>
+            </aside>
+
+            <main class="content">
+                <!-- 论文列表视图 -->
+                <div id="papers" class="view active">
+                    <div class="papers-grid" id="papersGrid">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+
+                <!-- 融合版产品机会板 -->
+                <div id="opportunities" class="view">
+                    <h2 id="opportunitiesTitle" class="reveal" style="margin-bottom: 10px;">💡 产品机会板</h2>
+                    <p id="opportunitiesIntro" class="reveal" style="color: #97a6c4; margin-bottom: 40px;">基于本周热门论文，结合现有市面上最新的产品和技术，解读未来半年内的产品机会</p>
+                    
+                    <!-- 战略级判断 -->
+                    <div class="opp-fusion-section">
+                            <h3 id="strategySectionTitle" class="opp-fusion-section-title">🎯 战略级判断（3+1）</h3>
+                        <div class="strategy-cards" id="strategyCards"></div>
+                    </div>
+                    
+                    <!-- 新产品形态机会 -->
+                    <div class="opp-fusion-section">
+                            <h3 id="newProductSectionTitle" class="opp-fusion-section-title">🆕 新产品形态机会</h3>
+                        <div class="new-products" id="newProducts"></div>
+                    </div>
+                </div>
+
+                <!-- 雷达+时间线视图 -->
+                <div id="radartime" class="view">
+                    <div class="radartime-container">
+                        <div class="radartime-left">
+                                <h2 id="radarSectionTitle" style="margin-bottom: 20px;">📊 能力维度分布</h2>
+                            <div class="radar-container">
+                                <canvas id="radarChart"></canvas>
+                            </div>
+                            <div class="analysis-box" id="radarAnalysis">
+                                    <h3 id="analysisTitle">📊 维度分析</h3>
+                                <ul id="dimensionAnalysis">
+                                    <!-- 动态生成 -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="radartime-right">
+                            <h2 style="margin-bottom: 30px;" id="timelineTitle">⏰ 最近7天论文时间线</h2>
+                            <div class="timeline" id="timelineContainer">
+                                <!-- 动态生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        const UI_TEXT = {
+            zh: {
+                pageTitle: 'AI 论文雷达 - 每周精选论文',
+                heroKicker: '每周情报 · 产品视角 · AI 前沿',
+                heroTitleMain: 'AI',
+                heroTitleAccent: '论文雷达',
+                heroSubtitle: '追踪真正值得花时间理解的 AI 论文，把技术热点整理成更清晰的产品判断、能力地图和机会线索。',
+                sourceLabel: '数据来源',
+                papersCount: '篇论文',
+                activeDimensions: '个活跃维度',
+                tabs: {
+                    papers: '📄 论文列表',
+                    opportunities: '💡 产品机会',
+                    radartime: '📊 能力维度 + ⏰ 时间线'
+                },
+                sidebarAll: '📄 全部论文',
+                opportunitiesTitle: '💡 产品机会板',
+                opportunitiesIntro: '基于本周热门论文，结合现有市面上最新的产品和技术，解读未来半年内的产品机会',
+                strategySectionTitle: '🎯 战略级判断（3+1）',
+                newProductSectionTitle: '🆕 新产品形态机会',
+                radarSectionTitle: '📊 能力维度分布',
+                analysisTitle: '📊 维度分析',
+                timelineSuffix: '论文时间线',
+                blocks: {
+                    tech: '🔧 核心技术',
+                    value: '💎 应用价值',
+                    pm: '🎯 PM 建议'
+                },
+                labels: {
+                    github: '📦 GitHub',
+                    relatedPapers: '📚 相关论文',
+                    actionAdvice: '💡 行动建议',
+                    applicableScenes: '🎯 适用场景',
+                    noStrategy: '暂无战略总结',
+                    noProducts: '暂无新产品形态机会',
+                    paperCountDataset: '论文数量',
+                    countSuffix: '篇'
+                },
+                dimensions: {
+                    understanding: '理解与记忆',
+                    action: '行动能力',
+                    multimodal: '多模态',
+                    efficiency: '效率与成本',
+                    safety: '可靠性与安全',
+                    robotics: '机器人/具身智能'
+                }
+            },
+            en: {
+                pageTitle: 'AI Paper Radar - Weekly Selected Papers',
+                heroKicker: 'Weekly intelligence · product lens · AI frontier',
+                heroTitleMain: 'AI',
+                heroTitleAccent: 'Paper Radar',
+                heroSubtitle: 'Track the AI papers actually worth your time and turn research heat into clearer product judgments, capability maps, and opportunity signals.',
+                sourceLabel: 'Source',
+                papersCount: 'papers',
+                activeDimensions: 'active dimensions',
+                tabs: {
+                    papers: '📄 Papers',
+                    opportunities: '💡 Opportunities',
+                    radartime: '📊 Capability Map + ⏰ Timeline'
+                },
+                sidebarAll: '📄 All Papers',
+                opportunitiesTitle: '💡 Opportunity Board',
+                opportunitiesIntro: 'Read the next six months of product opportunities through this week\'s most relevant papers and the current market landscape.',
+                strategySectionTitle: '🎯 Strategic Calls (3+1)',
+                newProductSectionTitle: '🆕 New Product Shapes',
+                radarSectionTitle: '📊 Capability Distribution',
+                analysisTitle: '📊 Dimension Analysis',
+                timelineSuffix: 'Paper Timeline',
+                blocks: {
+                    tech: '🔧 Core Idea',
+                    value: '💎 Product Value',
+                    pm: '🎯 PM Take'
+                },
+                labels: {
+                    github: '📦 GitHub',
+                    relatedPapers: '📚 Related Papers',
+                    actionAdvice: '💡 Action',
+                    applicableScenes: '🎯 Use Cases',
+                    noStrategy: 'No strategic summary yet',
+                    noProducts: 'No new product concepts yet',
+                    paperCountDataset: 'Paper Count',
+                    countSuffix: ''
+                },
+                dimensions: {
+                    understanding: 'Understanding & Memory',
+                    action: 'Action Capability',
+                    multimodal: 'Multimodal',
+                    efficiency: 'Efficiency & Cost',
+                    safety: 'Reliability & Safety',
+                    robotics: 'Robotics & Embodied AI'
+                }
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function text(path) {
+            return path.split('.').reduce((acc, key) => acc && acc[key], UI_TEXT[currentLang]) || '';
+        }
+
+        function getDimensionName(key, fallback) {
+            return UI_TEXT[currentLang].dimensions[key] || fallback || key;
+        }
+
+        function formatPaperCount(count) {
+            return currentLang === 'zh' ? `${count} ${text('papersCount')}` : `${count} ${text('papersCount')}`;
+        }
+
+        function formatDimensionCount(count) {
+            return currentLang === 'zh' ? `${count} ${text('activeDimensions')}` : `${count} ${text('activeDimensions')}`;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            document.title = text('pageTitle');
+            document.getElementById('langZh').classList.toggle('active', lang === 'zh');
+            document.getElementById('langEn').classList.toggle('active', lang === 'en');
+            initPage();
+        }
+
+        // ========== 初始化 ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            initPage();
+        });
+
+        function initPage() {
+            initHeroTitle();
+            renderStaticText();
+
+            // 更新头部信息
+            document.getElementById('headerInfo').textContent = 
+                `${text('sourceLabel')}: Hugging Face Weekly Papers (${PAPER_DATA.dateRange})`;
+            document.getElementById('timelineTitle').textContent = 
+                `${PAPER_DATA.week} ${text('timelineSuffix')}`;
+
+            // 计算各维度数量
+            const dimCounts = {};
+            Object.keys(PAPER_DATA.dimensions).forEach(d => dimCounts[d] = 0);
+            PAPER_DATA.papers.forEach(p => {
+                if (dimCounts[p.dimension] !== undefined) {
+                    dimCounts[p.dimension]++;
+                }
+            });
+            const activeDimensions = Object.values(dimCounts).filter(count => count > 0).length;
+            document.getElementById('paperCount').textContent = formatPaperCount(PAPER_DATA.papers.length);
+            document.getElementById('dimensionCount').textContent = formatDimensionCount(activeDimensions);
+
+            // 渲染侧边栏
+            renderSidebar(dimCounts);
+
+            // 渲染论文列表
+            renderPapers();
+
+            // 渲染雷达图
+            renderRadarChart(dimCounts);
+
+            // 渲染维度分析
+            renderDimensionAnalysis(dimCounts);
+
+            // 渲染时间线
+            renderTimeline();
+
+            // 渲染融合版产品机会
+            renderFusionOpportunities();
+
+            // 应用滚动 reveal 动效
+            queueRevealAnimation();
+        }
+
+        function initHeroTitle() {
+            const title = document.getElementById('heroTitle');
+            title.innerHTML = `
+                <span class="title-word" style="animation-delay:0s">${text('heroTitleMain')}</span>
+                <span class="title-word hero-title-accent" style="animation-delay:0.09s">${text('heroTitleAccent')}</span>
+            `;
+        }
+
+        function renderStaticText() {
+            document.getElementById('heroKicker').textContent = text('heroKicker');
+            document.getElementById('heroSubtitle').textContent = text('heroSubtitle');
+            document.getElementById('tabPapers').textContent = text('tabs.papers');
+            document.getElementById('tabOpportunities').textContent = text('tabs.opportunities');
+            document.getElementById('tabRadartime').textContent = text('tabs.radartime');
+            document.getElementById('sidebarTitle').textContent = text('sidebarAll');
+            document.getElementById('opportunitiesTitle').textContent = text('opportunitiesTitle');
+            document.getElementById('opportunitiesIntro').textContent = text('opportunitiesIntro');
+            document.getElementById('strategySectionTitle').textContent = text('strategySectionTitle');
+            document.getElementById('newProductSectionTitle').textContent = text('newProductSectionTitle');
+            document.getElementById('radarSectionTitle').textContent = text('radarSectionTitle');
+            document.getElementById('analysisTitle').textContent = text('analysisTitle');
+        }
+
+        // ========== 视图切换 ==========
+        function showView(viewName) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.view-tabs button').forEach(b => b.classList.remove('active'));
+            document.getElementById(viewName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // ========== 渲染侧边栏 ==========
+        function renderSidebar(dimCounts) {
+            const nav = document.getElementById('dimensionNav');
+            nav.innerHTML = Object.entries(PAPER_DATA.dimensions).map(([key, dim]) => `
+                <li>
+                    <a onclick="filterByDimension('${key}')" id="nav-${key}">
+                        <span class="icon">${dim.icon}</span>
+                        <span>${getDimensionName(key, dim.name)}</span>
+                        <span class="count">${dimCounts[key] || 0}</span>
+                    </a>
+                </li>
+            `).join('');
+        }
+
+        // ========== 滚动到顶部 ==========
+        function scrollToTop() {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('papers').classList.add('active');
+            document.querySelectorAll('.view-tabs button').forEach(b => b.classList.remove('active'));
+            document.querySelector('.view-tabs button').classList.add('active');
+            document.querySelectorAll('.dimension-nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById('papersGrid').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ========== 滚动到维度 ==========
+        function filterByDimension(dimension) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('papers').classList.add('active');
+            document.querySelectorAll('.view-tabs button').forEach(b => b.classList.remove('active'));
+            document.querySelector('.view-tabs button').classList.add('active');
+
+            document.querySelectorAll('.dimension-nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById(`nav-${dimension}`).classList.add('active');
+            
+            const sectionEl = document.getElementById(`section-${dimension}`);
+            if (sectionEl) {
+                sectionEl.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ========== 渲染论文列表 ==========
+        function renderPapers() {
+            const grid = document.getElementById('papersGrid');
+            
+            const dimOrder = Object.keys(PAPER_DATA.dimensions);
+            let html = '';
+            
+            dimOrder.forEach(dimKey => {
+                const dim = PAPER_DATA.dimensions[dimKey];
+                const dimPapers = PAPER_DATA.papers.filter(p => p.dimension === dimKey);
+                
+                if (dimPapers.length === 0) return;
+                
+                html += `
+                    <div class="dimension-section" id="section-${dimKey}">
+                        <h2 class="dimension-section-title">${dim.icon} ${getDimensionName(dimKey, dim.name)} <span class="section-count">(${dimPapers.length})</span></h2>
+                    </div>
+                `;
+                
+                dimPapers.forEach(paper => {
+                    html += `
+                    <div class="paper-card reveal" id="paper-${paper.id}">
+                        <div class="paper-dimension">${dim.icon} ${getDimensionName(dimKey, dim.name)}</div>
+                        <div class="paper-header">
+                            <div class="paper-icon">${dim.icon}</div>
+                            <div class="paper-title-block">
+                                <h2 class="paper-title">
+                                    <a href="${paper.url}" target="_blank">${paper.title} 🔗</a>
+                                </h2>
+                                <div class="paper-meta">
+                                    <span class="paper-likes">❤️ ${paper.likes}</span>
+                                    ${paper.org_tag ? `<span class="org-tag">🏢 ${paper.org_tag}</span>` : ''}
+                                    ${paper.github_url ? `<a href="${paper.github_url}" target="_blank" class="github-link">${text('labels.github')}</a>` : ''}
+                                    <span class="paper-date">${paper.published_date || paper.date}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="paper-blocks">
+                            <div class="info-block tech">
+                                <div class="block-label">${text('blocks.tech')}</div>
+                                <div class="block-content">${paper.tech_core || paper.tech_summary || paper.abstract}</div>
+                            </div>
+                            <div class="info-block capability">
+                                <div class="block-label">${text('blocks.value')}</div>
+                                <div class="block-content">${paper.value || paper.capability || '—'}</div>
+                            </div>
+                            <div class="info-block product">
+                                <div class="block-label">${text('blocks.pm')}</div>
+                                <div class="block-content">${paper.pm_suggestion || paper.product_implication || '—'}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                });
+            });
+            
+            grid.innerHTML = html;
+        }
+
+        // ========== 渲染雷达图 ==========
+        let radarChart = null;
+
+        function renderRadarChart(dimCounts) {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            const labels = Object.entries(PAPER_DATA.dimensions).map(([key, d]) => `${d.icon} ${getDimensionName(key, d.name)}`);
+            const data = Object.keys(PAPER_DATA.dimensions).map(k => dimCounts[k] || 0);
+
+            if (radarChart) radarChart.destroy();
+
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: text('labels.paperCountDataset'),
+                        data: data,
+                        fill: true,
+                        backgroundColor: 'rgba(121, 166, 255, 0.18)',
+                        borderColor: 'rgb(121, 166, 255)',
+                        pointBackgroundColor: 'rgb(121, 166, 255)',
+                        pointBorderColor: '#0d1427',
+                        pointHoverBackgroundColor: '#dce8ff',
+                        pointHoverBorderColor: 'rgb(121, 166, 255)',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    elements: { line: { borderWidth: 3 } },
+                    scales: {
+                        r: {
+                            angleLines: { display: true, color: 'rgba(173, 191, 230, 0.12)' },
+                            grid: { color: 'rgba(173, 191, 230, 0.12)' },
+                            pointLabels: {
+                                color: '#dce8ff',
+                                font: { size: 13 }
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: Math.max(...data) + 2,
+                            ticks: {
+                                stepSize: 1,
+                                color: '#97a6c4',
+                                backdropColor: 'transparent'
+                            }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // ========== 渲染维度分析 ==========
+        function renderDimensionAnalysis(dimCounts) {
+            const list = document.getElementById('dimensionAnalysis');
+            list.innerHTML = Object.entries(PAPER_DATA.dimensions).map(([key, dim]) => {
+                const count = dimCounts[key] || 0;
+                return `<li><strong>${dim.icon} ${getDimensionName(key, dim.name)} (${count}${text('labels.countSuffix')})</strong> - ${dim.keywords ? dim.keywords.slice(0, 5).join(', ') : ''}</li>`;
+            }).join('');
+        }
+
+        // ========== 渲染时间线 ==========
+        function renderTimeline() {
+            const container = document.getElementById('timelineContainer');
+            
+            const byDate = {};
+            PAPER_DATA.papers.forEach(p => {
+                const date = p.published_date || p.date;
+                if (!byDate[date]) byDate[date] = [];
+                byDate[date].push(p);
+            });
+
+            const sortedDates = Object.keys(byDate).sort((a, b) => {
+                const parseDate = (d) => new Date(`${d}, 2026`);
+                return parseDate(b) - parseDate(a);
+            });
+
+            container.innerHTML = sortedDates.map(date => `
+                <div class="timeline-item">
+                    <div class="timeline-date reveal" data-reveal="left">${date}</div>
+                    <div class="timeline-content">
+                        <div class="timeline-papers">
+                            ${byDate[date].map(paper => {
+                                const dim = PAPER_DATA.dimensions[paper.dimension] || { icon: '📄', name: currentLang === 'zh' ? '其他' : 'Other' };
+                                return `
+                                    <div class="timeline-paper reveal">
+                                        <div class="timeline-paper-title">
+                                            <a href="${paper.url}" target="_blank">${paper.title}</a>
+                                        </div>
+                                        <span class="timeline-paper-dimension">${dim.icon} ${getDimensionName(paper.dimension, dim.name)}</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== 渲染融合版产品机会板 ==========
+        function renderFusionOpportunities() {
+            renderStrategyCards();
+            renderNewProducts();
+        }
+
+        // 战略级判断
+        function renderStrategyCards() {
+            const container = document.getElementById('strategyCards');
+            // 优先使用新数据结构，兼容旧数据
+            const strategies = PAPER_DATA.opportunities?.strategies || PAPER_DATA.opportunities3?.strategies || [];
+            
+            if (strategies.length === 0) {
+                container.innerHTML = `<p style="color: #97a6c4;">${text('labels.noStrategy')}</p>`;
+                return;
+            }
+
+            container.innerHTML = strategies.map(s => {
+                // 生成相关论文链接
+                let papersHtml = '';
+                if (s.relatedPapers && s.relatedPapers.length > 0) {
+                    const links = s.relatedPapers.map(id => {
+                        const paper = PAPER_DATA.papers.find(p => p.id === id);
+                        if (paper) {
+                            const shortName = paper.title.length > 25 ? paper.title.slice(0, 25) + '...' : paper.title;
+                            return `<a href="${paper.url}" target="_blank" class="paper-link">📄 ${shortName}</a>`;
+                        }
+                        return '';
+                    }).filter(Boolean).join('');
+                    if (links) {
+                        papersHtml = `
+                            <div class="related-papers">
+                                <div class="related-papers-label">${text('labels.relatedPapers')}</div>
+                                <div class="paper-links">${links}</div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                return `
+                    <div class="strategy-card ${s.type || ''} reveal">
+                        <h4>${s.icon || '🎯'} ${s.title}</h4>
+                        <div class="observation">📊 ${s.observation}</div>
+                        <div class="action">
+                            <strong>${text('labels.actionAdvice')}</strong>
+                            ${s.action}
+                        </div>
+                        ${papersHtml}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 新产品形态
+        function renderNewProducts() {
+            const container = document.getElementById('newProducts');
+            // 优先使用新数据结构，兼容旧数据
+            let newProducts = PAPER_DATA.opportunities?.newProducts || [];
+            
+            // 兼容旧的 opportunities2.trends 结构
+            if (newProducts.length === 0 && PAPER_DATA.opportunities2?.trends) {
+                const trends = PAPER_DATA.opportunities2.trends;
+                trends.forEach(trend => {
+                    (trend.opportunities || []).forEach(opp => {
+                        if (opp.type === 'newProduct') {
+                            newProducts.push({
+                                ...opp,
+                                relatedPapers: trend.relatedPapers || []
+                            });
+                        }
+                    });
+                });
+            }
+
+            if (newProducts.length === 0) {
+                container.innerHTML = `<p style="color: #97a6c4;">${text('labels.noProducts')}</p>`;
+                return;
+            }
+
+            container.innerHTML = newProducts.map(np => {
+                // 产品场景标签（兼容 products 和 scenes 字段）
+                const scenes = np.scenes || np.products || [];
+                const scenesHtml = scenes.map(s => `<span>${s}</span>`).join('');
+                
+                // 相关论文链接
+                let papersHtml = '';
+                if (np.relatedPapers && np.relatedPapers.length > 0) {
+                    const links = np.relatedPapers.slice(0, 4).map(id => {
+                        const paper = PAPER_DATA.papers.find(p => p.id === id);
+                        if (paper) {
+                            const shortName = paper.title.length > 20 ? paper.title.slice(0, 20) + '...' : paper.title;
+                            return `<a href="${paper.url}" target="_blank" class="paper-link">📄 ${shortName}</a>`;
+                        }
+                        return '';
+                    }).filter(Boolean).join('');
+                    if (links) {
+                        papersHtml = `
+                            <div class="related-papers">
+                                <div class="related-papers-label">${text('labels.relatedPapers')}</div>
+                                <div class="paper-links">${links}</div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                return `
+                    <div class="new-product-card reveal">
+                        <div class="card-header">
+                            <h4>${np.icon || '🆕'} ${np.title}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="description">${np.description}</div>
+                            ${scenesHtml ? `
+                                <div class="products">
+                                    <div class="products-label">${text('labels.applicableScenes')}</div>
+                                    ${scenesHtml}
+                                </div>
+                            ` : ''}
+                            ${papersHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ========== 平滑滚动到论文 ==========
+        function scrollToPaper(paperId) {
+            showView('papers');
+            document.querySelectorAll('.view-tabs button').forEach(b => b.classList.remove('active'));
+            document.querySelector('.view-tabs button').classList.add('active');
+            
+            setTimeout(() => {
+                const el = document.getElementById(`paper-${paperId}`);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    el.style.animation = 'highlight 2s';
+                }
+            }, 100);
+        }
+
+        function queueRevealAnimation() {
+            const elements = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                elements.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            elements.forEach((el, index) => {
+                el.style.transitionDelay = `${Math.min(index * 0.02, 0.18)}s`;
+                observer.observe(el);
+            });
+        }
+    </script>
+</body>
+</html>
