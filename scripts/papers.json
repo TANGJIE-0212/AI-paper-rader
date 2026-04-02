@@ -143,24 +143,24 @@
       "org_tag": "Shanda AI Research Tokyo"
     },
     {
-      "title": "VGGRPO: Towards World-Consistent Video Generation with 4D Latent Reward",
-      "url": "https://huggingface.co/papers/2603.26599",
-      "likes": 44,
-      "date": "2026-04-02",
-      "abstract": "Large-scalevideo diffusion modelsachieve impressive visual quality, yet often fail to preserve geometric consistency. Prior approaches improve consistency either by augmenting the generator with additional modules or applying geometry-aware alignment. However, architectural modifications can compromise the generalization of internet-scale pretrained models, while existing alignment methods are limited to static scenes and rely on RGB-space rewards that require repeated VAE decoding, incurring substantial compute overhead and failing to generalize to highly dynamic real-world scenes. To preserve the pretrained capacity while improving geometric consistency, we propose VGGRPO (Visual Geometry GRPO), a latent geometry-guided framework for geometry-aware video post-training. VGGRPO introduces aLatent Geometry Model(LGM) that stitches video diffusion latents togeometry foundation models, enabling direct decoding of scene geometry from thelatent space. By constructing LGM from a geometry model with4D reconstructioncapability, VGGRPO naturally extends to dynamic scenes, overcoming the static-scene limitations of prior methods. Building on this, we perform latent-spaceGroup Relative Policy Optimizationwith two complementary rewards: acamera motion smoothnessreward that penalizes jittery trajectories, and ageometry reprojection consistencyreward that enforces cross-view geometric coherence. Experiments on both static and dynamic benchmarks show that VGGRPO improves camera stability, geometry consistency, and overall quality while eliminating costly VAE decoding, making latent-space geometry-guided reinforcement an efficient and flexible approach toworld-consistent video generation.",
-      "published_date": "Mar 27",
-      "github_url": null,
-      "org_tag": "Google"
-    },
-    {
       "title": "MiroEval: Benchmarking Multimodal Deep Research Agents in Process and Outcome",
       "url": "https://huggingface.co/papers/2603.28407",
-      "likes": 43,
+      "likes": 45,
       "date": "2026-04-02",
       "abstract": "Recent progress indeep research systemshas been impressive, but evaluation still lags behindreal user needs. Existing benchmarks predominantly assess final reports using fixed rubrics, failing to evaluate the underlying research process. Most also offer limitedmultimodal coverage, rely on synthetic tasks that do not reflect real-world query complexity, and cannot be refreshed as knowledge evolves. To address these gaps, we introduce MiroEval, a benchmark andevaluation frameworkfordeep research systems. The benchmark comprises 100 tasks (70 text-only, 30 multimodal), all grounded inreal user needsand constructed via adual-path pipelinethat supports periodic updates, enabling a live and evolving setting. The proposed evaluation suite assessesdeep research systemsalong three complementary dimensions:adaptive synthesis quality evaluationwith task-specific rubrics,agentic factuality verificationvia active retrieval and reasoning over both web sources and multimodal attachments, andprocess-centric evaluationaudits how the system searches, reasons, and refines throughout its investigation. Evaluation across 13 systems yields three principal findings: the three evaluation dimensions capture complementary aspects of system capability, with each revealing distinct strengths and weaknesses across systems; process quality serves as a reliable predictor of overall outcome while revealing weaknesses invisible to output-level metrics; and multimodal tasks pose substantially greater challenges, with most systems declining by 3 to 10 points. The MiroThinker series achieves the most balanced performance, with MiroThinker-H1 ranking the highest overall in both settings. Human verification and robustness results confirm the reliability of the benchmark andevaluation framework. MiroEval provides a holistic diagnostic tool for the next generation ofdeep research agents.",
       "published_date": "Mar 30",
       "github_url": "https://github.com/MiroMindAI/MiroEval",
       "org_tag": "MiroMind AI"
+    },
+    {
+      "title": "VGGRPO: Towards World-Consistent Video Generation with 4D Latent Reward",
+      "url": "https://huggingface.co/papers/2603.26599",
+      "likes": 45,
+      "date": "2026-04-02",
+      "abstract": "Large-scalevideo diffusion modelsachieve impressive visual quality, yet often fail to preserve geometric consistency. Prior approaches improve consistency either by augmenting the generator with additional modules or applying geometry-aware alignment. However, architectural modifications can compromise the generalization of internet-scale pretrained models, while existing alignment methods are limited to static scenes and rely on RGB-space rewards that require repeated VAE decoding, incurring substantial compute overhead and failing to generalize to highly dynamic real-world scenes. To preserve the pretrained capacity while improving geometric consistency, we propose VGGRPO (Visual Geometry GRPO), a latent geometry-guided framework for geometry-aware video post-training. VGGRPO introduces aLatent Geometry Model(LGM) that stitches video diffusion latents togeometry foundation models, enabling direct decoding of scene geometry from thelatent space. By constructing LGM from a geometry model with4D reconstructioncapability, VGGRPO naturally extends to dynamic scenes, overcoming the static-scene limitations of prior methods. Building on this, we perform latent-spaceGroup Relative Policy Optimizationwith two complementary rewards: acamera motion smoothnessreward that penalizes jittery trajectories, and ageometry reprojection consistencyreward that enforces cross-view geometric coherence. Experiments on both static and dynamic benchmarks show that VGGRPO improves camera stability, geometry consistency, and overall quality while eliminating costly VAE decoding, making latent-space geometry-guided reinforcement an efficient and flexible approach toworld-consistent video generation.",
+      "published_date": "Mar 27",
+      "github_url": null,
+      "org_tag": "Google"
     },
     {
       "title": "Trace2Skill: Distill Trajectory-Local Lessons into Transferable Agent Skills",
@@ -195,7 +195,7 @@
     {
       "title": "Terminal Agents Suffice for Enterprise Automation",
       "url": "https://huggingface.co/papers/2604.00073",
-      "likes": 34,
+      "likes": 36,
       "date": "2026-04-02",
       "abstract": "There has been growing interest in building agents that can interact with digital platforms to execute meaningful enterprise tasks autonomously. Among the approaches explored aretool-augmented agentsbuilt on abstractions such asModel Context Protocol(MCP) andweb agentsthat operate through graphical interfaces. Yet, it remains unclear whether such complex agentic systems are necessary given their cost and operational overhead. We argue that a coding agent equipped only with a terminal and a filesystem can solve many enterprise tasks more effectively by interacting directly with platform APIs. We evaluate this hypothesis across diverse real-world systems and show that these low-level terminal agents match or outperform more complex agent architectures. Our findings suggest that simple programmatic interfaces, combined with strongfoundation models, are sufficient for practicalenterprise automation.",
       "published_date": "Mar 31",
