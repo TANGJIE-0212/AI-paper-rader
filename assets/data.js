@@ -1,3 +1,4 @@
+// AI Paper Radar - Weekly Analysis
 const PAPER_DATA = {
   "week": "2026-W14",
   "dateRange": "2026-03-29 to 2026-04-04",
