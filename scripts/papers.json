@@ -1,206 +1,206 @@
 {
-  "week": "2026-W15",
-  "dateRange": "2026-04-05 to 2026-04-11",
+  "week": "2026-W16",
+  "dateRange": "2026-04-12 to 2026-04-18",
   "papers": [
     {
-      "title": "Adam's Law: Textual Frequency Law on Large Language Models",
-      "url": "https://huggingface.co/papers/2604.02176",
-      "likes": 461,
-      "date": "2026-04-13",
-      "abstract": "While textual frequency has been validated as relevant to human cognition in reading speed, its relatedness toLarge Language Models(LLMs) is seldom studied. We propose a novel research direction in terms of textual data frequency, which is an understudied topic, to the best of our knowledge. Our framework is composed of three units. First, this paper proposesTextual Frequency Law(TFL), which indicates that frequent textual data should be preferred for LLMs for bothpromptingandfine-tuning. Since many LLMs are closed-source in their training data, we propose using online resources to estimate thesentence-level frequency. We then utilize aninput paraphraserto paraphrase the input into a more frequent textual expression. Next, we proposeTextual Frequency Distillation(TFD) by querying LLMs to conductstory completionby further extending the sentences in the datasets, and the resulting corpora are used to adjust the initial estimation. Finally, we proposeCurriculum Textual Frequency Training(CTFT) that fine-tunes LLMs in an increasing order ofsentence-level frequency. Experiments are conducted on our curated dataset Textual Frequency Paired Dataset (TFPD) onmath reasoning,machine translation,commonsense reasoningandagentic tool calling. Results show the effectiveness of our framework.",
-      "published_date": "Apr 2",
-      "github_url": "https://github.com/HongyuanLuke/frequencylaw",
-      "org_tag": "FaceMind"
-    },
-    {
-      "title": "GrandCode: Achieving Grandmaster Level in Competitive Programming via Agentic Reinforcement Learning",
-      "url": "https://huggingface.co/papers/2604.02721",
-      "likes": 349,
-      "date": "2026-04-13",
-      "abstract": "Competitive programmingremains one of the last few human strongholds in coding against AI. The best AI system to date still underperforms the best humanscompetitive programming: the most recent best result, Google's Gemini~3 Deep Think, attained 8th place even not being evaluated under live competition conditions. In this work, we introduce GrandCode, amulti-agent RLsystem designed forcompetitive programming. The capability of GrandCode is attributed to two key factors: (1) It orchestrates a variety of agentic modules (hypothesis proposal, solver, test generator, summarization, etc) and jointly improves them throughpost-trainingandonline test-time RL; (2) We introduceAgentic GRPOspecifically designed for multi-stage agent rollouts with delayed rewards and the severe off-policy drift that is prevalent in agentic RL. GrandCode is the first AI system that consistently beats all human participants in live contests ofcompetitive programming: in the most recent threeCodeforceslive competitions, i.e., Round~1087 (Mar 21, 2026), Round~1088 (Mar 28, 2026), and Round~1089 (Mar 29, 2026), GrandCode placed first in all of them, beating all human participants, including legendarygrandmasters. GrandCode shows that AI systems have reached a point where they surpass the strongest human programmers on the most competitive coding tasks.",
-      "published_date": "Apr 3",
-      "github_url": "https://github.com/deepreinforce-ai/codeforces",
-      "org_tag": "DeepReinforce"
-    },
-    {
-      "title": "Rethinking Generalization in Reasoning SFT: A Conditional Analysis on Optimization, Data, and Model Capability",
-      "url": "https://huggingface.co/papers/2604.06628",
-      "likes": 298,
-      "date": "2026-04-13",
-      "abstract": "A prevailing narrative in LLM post-training holds thatsupervised finetuning(SFT) memorizes whilereinforcement learning(RL) generalizes. We revisit this claim for reasoning SFT withlong chain-of-thought(CoT) supervision and find thatcross-domain generalizationis not absent but conditional, jointly shaped byoptimization dynamics,training data, andbase-model capability. Some reported failures are under-optimization artifacts: cross-domain performance first degrades before recovering and improving with extended training (adip-and-recovery pattern), so shorttraining checkpoints can underestimate generalization.Data qualityand structure both matter: low-quality solutions broadly hurt generalization,while verified long-CoT traces yield consistent cross-domain gains.Model capabilityis essential: stronger models internalize transferable procedural patterns (e.g., backtracking) even from a toy arithmetic game, while weaker ones imitate surface verbosity. This generalization is asymmetric, however: reasoning improves while safety degrades, reframing the question from whether reasoning SFT generalizes to under what conditions and at what cost.",
-      "published_date": "Apr 8",
-      "github_url": "https://github.com/Nebularaid2000/rethink_sft_generalization",
-      "org_tag": "AI45Research"
-    },
-    {
-      "title": "SkillClaw: Let Skills Evolve Collectively with Agentic Evolver",
-      "url": "https://huggingface.co/papers/2604.08377",
-      "likes": 263,
-      "date": "2026-04-13",
-      "abstract": "Large language model (LLM) agents such as OpenClaw rely onreusable skillsto perform complex tasks, yet these skills remain largely static after deployment. As a result, similar workflows, tool usage patterns, and failure modes are repeatedly rediscovered across users, preventing the system from improving with experience. While interactions from different users provide complementary signals about when a skill works or fails, existing systems lack a mechanism to convert such heterogeneous experiences into reliable skill updates. To address these issues, we present SkillClaw, a framework for collective skill evolution inmulti-user agent ecosystems, which treats cross-user and over-time interactions as the primary signal for improving skills. SkillClaw continuously aggregates trajectories generated during use and processes them with anautonomous evolver, which identifies recurring behavioral patterns and translates them into updates to the skill set by refining existing skills or extending them with new capabilities. The resulting skills are maintained in ashared repositoryand synchronized across users, allowing improvements discovered in one context to propagate system-wide while requiring no additional effort from users. By integrating multi-user experience into ongoing skill updates, SkillClaw enablescross-user knowledge transferandcumulative capability improvement, and experiments on WildClawBench show that limited interaction and feedback, it significantly improves the performance of Qwen3-Max in real-world agent scenarios.",
+      "title": "WildDet3D: Scaling Promptable 3D Detection in the Wild",
+      "url": "https://huggingface.co/papers/2604.08626",
+      "likes": 238,
+      "date": "2026-04-19",
+      "abstract": "Understanding objects in 3D from a single image is a cornerstone ofspatial intelligence. A key step toward this goal ismonocular 3D object detection--recovering the extent, location, and orientation of objects from an input RGB image. To be practical in the open world, such a detector must generalize beyond closed-set categories, support diverse prompt modalities, and leverage geometric cues when available. Progress is hampered by two bottlenecks: existing methods are designed for a single prompt type and lack a mechanism to incorporate additional geometric cues, and current 3D datasets cover only narrow categories in controlled environments, limitingopen-world transfer. In this work we address both gaps. First, we introduce WildDet3D, a unifiedgeometry-aware architecturethat natively accepts text, point, andbox promptsand can incorporate auxiliarydepth signalsat inference time. Second, we present WildDet3D-Data, the largest open3D detection datasetto date, constructed by generating candidate 3D boxes from existing 2D annotations and retaining only human-verified ones, yielding over 1M images across 13.5K categories in diverse real-world scenes. WildDet3D establishes a new state-of-the-art across multiple benchmarks and settings. In the open-world setting, it achieves 22.6/24.8 AP3D on our newly introduced WildDet3D-Bench with text andbox prompts. On Omni3D, it reaches 34.2/36.4 AP3D with text andbox prompts, respectively. In zero-shot evaluation, it achieves 40.3/48.9 ODS on Argoverse 2 and ScanNet. Notably, incorporating depth cues at inference time yields substantial additional gains (+20.7 AP on average across settings).",
       "published_date": "Apr 9",
-      "github_url": "https://github.com/AMAP-ML/SkillClaw",
-      "org_tag": null
+      "github_url": "https://github.com/allenai/WildDet3D",
+      "org_tag": "Ai2"
     },
     {
-      "title": "ClawBench: Can AI Agents Complete Everyday Online Tasks?",
-      "url": "https://huggingface.co/papers/2604.08523",
-      "likes": 244,
-      "date": "2026-04-13",
-      "abstract": "AI agentsmay be able to automate your inbox, but can they automate other routine aspects of your life? Everydayonline tasksoffer a realistic yet unsolved testbed for evaluating the next generation ofAI agents. To this end, we introduce ClawBench, anevaluation frameworkof 153 simple tasks that people need to accomplish regularly in their lives and work, spanning 144 live platforms across 15 categories, from completing purchases and booking appointments to submitting job applications. These tasks require demanding capabilities beyond existing benchmarks, such as obtaining relevant information from user-provided documents, navigatingmulti-step workflowsacross diverse platforms, and write-heavy operations like filling in many detailed forms correctly. Unlike existing benchmarks that evaluate agents in offline sandboxes with static pages, ClawBench operates on production websites, preserving the full complexity, dynamic nature, and challenges ofreal-world web interaction. A lightweight interception layer captures and blocks only the final submission request, ensuring safe evaluation without real-world side effects. Our evaluations of 7 frontier models show that both proprietary and open-source models can complete only a small portion of these tasks. For example, Claude Sonnet 4.6 achieves only 33.3%. Progress on ClawBench brings us closer toAI agentsthat can function as reliable general-purpose assistants.",
-      "published_date": "Apr 9",
-      "github_url": "https://github.com/reacher-z/ClawBench",
-      "org_tag": "Natural and Artificial Intelligence Lab"
-    },
-    {
-      "title": "Video-MME-v2: Towards the Next Stage in Benchmarks for Comprehensive Video Understanding",
-      "url": "https://huggingface.co/papers/2604.05015",
-      "likes": 228,
-      "date": "2026-04-13",
-      "abstract": "With the rapid advancement ofvideo understanding, existing benchmarks are becoming increasingly saturated, exposing a critical discrepancy between inflated leaderboard scores and real-world model capabilities. To address this widening gap, we introduce Video-MME-v2, a comprehensive benchmark designed to rigorously evaluate the robustness and faithfulness ofvideo understanding. To systematically evaluate model capabilities, we design aprogressive tri-level hierarchythat incrementally increases the complexity of video comprehension, ranging from multi-pointvisual information aggregation, totemporal dynamics modeling, and ultimately to complexmultimodal reasoning. Besides, in contrast to conventional per-question accuracy, we propose agroup-based non-linear evaluationstrategy that enforces both consistency across related queries and coherence in multi-step reasoning. It penalizes fragmented or guess-based correctness and assigns credit only to answers supported by valid reasoning. To guarantee data quality, Video-MME-v2 is constructed through a rigorously controlledhuman annotation pipeline, involving 12 annotators and 50 independent reviewers. Backed by 3,300 human-hours and up to 5 rounds of quality assurance, Video-MME-v2 aims to serve as one of the most authoritative video benchmarks. Extensive experiments reveal a substantial gap between current best model Gemini-3-Pro and human experts, and uncover a clearhierarchical bottleneckwhere errors invisual information aggregationand temporal modeling propagate to limithigh-level reasoning. We further find thatthinking-based reasoningis highly dependent ontextual cues, improving performance withsubtitlesbut sometimes degrading it in purely visual settings. By exposing these limitations, Video-MME-v2 establishes a demanding new testbed for the development of next-generationvideo MLLMs.",
-      "published_date": "Apr 6",
-      "github_url": "https://github.com/MME-Benchmarks/Video-MME-v2",
-      "org_tag": "MME-Benchmarks"
-    },
-    {
-      "title": "InCoder-32B-Thinking: Industrial Code World Model for Thinking",
-      "url": "https://huggingface.co/papers/2604.03144",
-      "likes": 228,
-      "date": "2026-04-13",
-      "abstract": "Industrial software development across chip design, GPU optimization, and embedded systems lacks expertreasoning tracesshowing how engineers reason about hardware constraints and timing semantics. In this work, we propose InCoder-32B-Thinking, trained on the data from theError-driven Chain-of-Thought(ECoT) synthesis framework with anindustrial code world model(ICWM) to generatereasoning traces. Specifically, ECoT generates reasoning chains by synthesizing the thinking content from multi-turn dialogue with environmental error feedback, explicitly modeling the error-correction process. ICWM is trained on domain-specific execution traces fromVerilog simulation,GPU profiling, etc., learns thecausal dynamicsof how code affects hardware behavior, and enablesself-verificationby predictingexecution outcomesbefore actual compilation. All synthesizedreasoning tracesare validated throughdomain toolchains, creating training data matching the natural reasoning depth distribution of industrial tasks. Evaluation on 14 general (81.3% on LiveCodeBench v5) and 9 industrial benchmarks (84.0% in CAD-Coder and 38.0% on KernelBench) shows InCoder-32B-Thinking achieves top-tier open-source results across all domains.GPU Optimization",
-      "published_date": "Apr 3",
-      "github_url": "https://github.com/CSJianYang/Industrial-Coder",
-      "org_tag": null
-    },
-    {
-      "title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
-      "url": "https://huggingface.co/papers/2604.04707",
-      "likes": 200,
-      "date": "2026-04-13",
-      "abstract": "World modelshave garnered significant attention as a promising research direction in artificial intelligence, yet a clear and unified definition remains lacking. In this paper, we introduce OpenWorldLib, a comprehensive and standardized inference framework for AdvancedWorld Models. Drawing on the evolution ofworld models, we propose a clear definition: a world model is a model or framework centered onperception, equipped withinteractionandlong-term memorycapabilities, for understanding and predicting the complex world. We further systematically categorize the essential capabilities ofworld models. Based on this definition, OpenWorldLib integrates models across different tasks within aunified framework, enabling efficient reuse andcollaborative inference. Finally, we present additional reflections and analyses on potential future directions for world model research. Code link: https://github.com/OpenDCAI/OpenWorldLib",
-      "published_date": "Apr 6",
-      "github_url": "https://github.com/OpenDCAI/OpenWorldLib",
-      "org_tag": "Peking University"
-    },
-    {
-      "title": "HY-Embodied-0.5: Embodied Foundation Models for Real-World Agents",
-      "url": "https://huggingface.co/papers/2604.07430",
-      "likes": 156,
-      "date": "2026-04-13",
-      "abstract": "We introduce HY-Embodied-0.5, a family of foundation models specifically designed for real-worldembodied agents. To bridge the gap between generalVision-Language Models(VLMs) and the demands ofembodied agents, our models are developed to enhance the core capabilities required by embodied intelligence: spatial and temporal visual perception, alongside advanced embodied reasoning for prediction, interaction, and planning. The HY-Embodied-0.5 suite comprises two primary variants: an efficient model with 2B activated parameters designed for edge deployment, and a powerful model with 32B activated parameters targeted for complex reasoning. To support the fine-grained visual perception essential for embodied tasks, we adopt aMixture-of-Transformers(MoT) architecture to enable modality-specific computing. By incorporatinglatent tokens, this design effectively enhances the perceptual representation of the models. To improve reasoning capabilities, we introduce an iterative, self-evolving post-training paradigm. Furthermore, we employon-policy distillationto transfer the advanced capabilities of the large model to the smaller variant, thereby maximizing the performance potential of the compact model. Extensive evaluations across 22 benchmarks, spanning visual perception, spatial reasoning, and embodied understanding, demonstrate the effectiveness of our approach. Our MoT-2B model outperforms similarly sized state-of-the-art models on 16 benchmarks, while the 32B variant achieves performance comparable to frontier models such as Gemini 3.0 Pro. In downstream robot control experiments, we leverage our robust VLM foundation to train an effective Vision-Language-Action (VLA) model, achieving compelling results in real-world physical evaluations. Code and models are open-sourced at https://github.com/Tencent-Hunyuan/HY-Embodied.",
-      "published_date": "Apr 8",
-      "github_url": "https://github.com/Tencent-Hunyuan/HY-Embodied",
-      "org_tag": "Tencent Hunyuan"
-    },
-    {
-      "title": "Self-Distilled RLVR",
-      "url": "https://huggingface.co/papers/2604.03128",
-      "likes": 155,
-      "date": "2026-04-13",
-      "abstract": "On-policy distillation(OPD) has become a popular training paradigm in the LLM community. This paradigm selects a larger model as the teacher to provide dense, fine-grained signals for each sampled trajectory, in contrast toreinforcement learning with verifiable rewards(RLVR), which only obtains sparse signals from verifiable outcomes in the environment. Recently, the community has exploredon-policy self-distillation(OPSD), where the same model serves as both teacher and student, with the teacher receiving additional privileged information such as reference answers to enable self-evolution. This paper demonstrates that learning signals solely derived from the privileged teacher result in severe information leakage and unstable long-term training. Accordingly, we identify the optimal niche forself-distillationand propose RLSD (RLVR withSelf-Distillation). Specifically, we leverageself-distillationto obtain token-levelpolicy differencesfor determining fine-grainedupdate magnitudes, while continuing to use RLVR to derive reliableupdate directionsfrom environmental feedback (e.g., response correctness). This enables RLSD to simultaneously harness the strengths of both RLVR and OPSD, achieving a higherconvergence ceilingand superiortraining stability.",
-      "published_date": "Apr 3",
+      "title": "Seedance 2.0: Advancing Video Generation for World Complexity",
+      "url": "https://huggingface.co/papers/2604.14148",
+      "likes": 136,
+      "date": "2026-04-19",
+      "abstract": "Seedance 2.0 is a new nativemulti-modal audio-video generationmodel, officially released in China in early February 2026. Compared with its predecessors, Seedance 1.0 and 1.5 Pro, Seedance 2.0 adopts a unified, highly efficient, and large-scale architecture for multi-modal audio-videojoint generation. This allows it to support four input modalities: text, image, audio, and video, by integrating one of the most comprehensive suites of multi-modalcontent referenceandediting capabilitiesavailable in the industry to date. It delivers substantial, well-rounded improvements across all key sub-dimensions of video and audio generation. In both expert evaluations and public user tests, the model has demonstrated performance on par with the leading levels in the field. Seedance 2.0 supports direct generation of audio-video content with durations ranging from 4 to 15 seconds, with native output resolutions of 480p and 720p. For multi-modal inputs as reference, its current open platform supports up to 3 video clips, 9 images, and 3 audio clips. In addition, we provide Seedance 2.0 Fast version, an accelerated variant of Seedance 2.0 designed to boostgeneration speedforlow-latency scenarios. Seedance 2.0 has delivered significant improvements to its foundational generation capabilities and multi-modal generation performance, bringing an enhanced creative experience for end users.",
+      "published_date": "Apr 15",
       "github_url": null,
+      "org_tag": "ByteDance Seed"
+    },
+    {
+      "title": "The Past Is Not Past: Memory-Enhanced Dynamic Reward Shaping",
+      "url": "https://huggingface.co/papers/2604.11297",
+      "likes": 135,
+      "date": "2026-04-19",
+      "abstract": "Despite the success ofreinforcement learningforlarge language models, a common failure mode is reducedsampling diversity, where the policy repeatedly generates similar erroneous behaviors. Classicalentropy regularizationencourages randomness under the current policy, but does not explicitly discourage recurrent failure patterns across rollouts. We propose MEDS, aMemory-Enhanced Dynamic reward Shapingframework that incorporateshistorical behavioral signalsinto reward design. By storing and leveragingintermediate model representations, we capture features of past rollouts and usedensity-based clusteringto identify frequently recurringerror patterns. Rollouts assigned to more prevalent error clusters are penalized more heavily, encouraging broader exploration while reducing repeated mistakes. Across five datasets and three base models, MEDS consistently improves average performance over existing baselines, achieving gains of up to 4.13 pass@1 points and 4.37 pass@128 points. Additional analyses using both LLM-based annotations and quantitative diversity metrics show that MEDS increasesbehavioral diversityduring sampling.",
+      "published_date": "Apr 13",
+      "github_url": "https://github.com/Linxi000/MEDS",
       "org_tag": null
     },
     {
-      "title": "MinerU2.5-Pro: Pushing the Limits of Data-Centric Document Parsing at Scale",
-      "url": "https://huggingface.co/papers/2604.04771",
-      "likes": 115,
-      "date": "2026-04-13",
-      "abstract": "Current document parsing methods compete primarily on model architecture innovation, while systematic engineering of training data remains underexplored. Yet SOTA models of different architectures and parameter scales exhibit highly consistent failure patterns on the same set of hard samples, suggesting that the performance bottleneck stems from shared deficiencies in training data rather than architecture itself. Building on this finding, we present \\minerupro, which advances the state of the art solely throughdata engineering and training strategy optimization while keeping the 1.2B-parameter architecture of \\mineru completely fixed. At its core is aData Engineco-designed around coverage, informativeness, and annotation accuracy:Diversity-and-Difficulty-Aware Samplingexpands training data from under 10M to 65.5M samples while correcting distribution shift;Cross-Model Consistency Verificationleverages output agreement among heterogeneous models to assess sample difficulty and generate reliable annotations; theJudge-and-Refine pipelineimproves annotation quality for hard samples through render-then-verify iterative correction. A three-stageprogressive training strategy--large-scale pre-training,hard sample fine-tuning, andGRPO alignment-- sequentially exploits these data at different quality tiers. On the evaluation front, we fix element-matching biases in OmniDocBench~v1.5 and introduce a Hard subset, establishing the more discriminative OmniDocBench~v1.6 protocol. Without any architectural modification, \\minerupro achieves 95.69 on OmniDocBench~v1.6, improving over the same-architecture baseline by 2.71 points and surpassing all existing methods including models with over 200times more parameters.",
-      "published_date": "Apr 6",
-      "github_url": null,
-      "org_tag": "OpenDataLab"
+      "title": "ClawGUI: A Unified Framework for Training, Evaluating, and Deploying GUI Agents",
+      "url": "https://huggingface.co/papers/2604.11784",
+      "likes": 134,
+      "date": "2026-04-19",
+      "abstract": "GUI agentsdrive applications through their visual interfaces instead of programmatic APIs, interacting with arbitrary software via taps, swipes, and keystrokes, reaching a long tail of applications that CLI-based agents cannot. Yet progress in this area is bottlenecked less by modeling capacity than by the absence of a coherent full-stack infrastructure: online RL training suffers fromenvironment instabilityandclosed pipelines,evaluation protocolsdrift silently across works, and trained agents rarely reach real users on real devices. We present ClawGUI, an open-source framework addressing these three gaps within a single harness. ClawGUI-RL provides the first open-source GUI agent RL infrastructure with validated support for both parallel virtual environments and real physical devices, integrating GiGPO with a Process Reward Model for dense step-level supervision. ClawGUI-Eval enforces a fully standardized evaluation pipeline across 6 benchmarks and 11+ models, achieving 95.8\\% reproduction against official baselines. ClawGUI-Agent brings trained agents to Android, HarmonyOS, and iOS through 12+ chat platforms withhybrid CLI-GUI controland persistent personalized memory. Trained end to end within this pipeline, ClawGUI-2B achieves 17.1\\%Success Rateon MobileWorld GUI-Only, outperforming the same-scale MAI-UI-2B baseline by 6.0\\%.",
+      "published_date": "Apr 13",
+      "github_url": "https://github.com/ZJU-REAL/ClawGUI",
+      "org_tag": "Zhejiang University"
     },
     {
-      "title": "Claw-Eval: Toward Trustworthy Evaluation of Autonomous Agents",
-      "url": "https://huggingface.co/papers/2604.06132",
-      "likes": 111,
-      "date": "2026-04-13",
-      "abstract": "Large language modelsare increasingly deployed asautonomous agentsexecutingmulti-step workflowsin real-world software environments. However, existingagent benchmarkssuffer from three critical limitations: (1)trajectory-opaque gradingthat checks only final outputs, (2) underspecified safety androbustness evaluation, and (3) narrow modality coverage and interaction paradigms. We introduce Claw-Eval, an end-to-end evaluation suite addressing all three gaps. It comprises 300 human-verified tasks spanning 9 categories across three groups (general service orchestration,multimodal perceptionand generation, and multi-turn professional dialogue). Every agent action is recorded through three independent evidence channels (execution traces, audit logs, and environment snapshots), enablingtrajectory-aware gradingover 2,159 fine-grained rubric items. The scoring protocol evaluates Completion, Safety, and Robustness, reporting Average Score,Pass@k, andPass^kacross three trials to distinguish genuine capability from lucky outcomes. Experiments on 14 frontier models reveal that: (1) trajectory-opaque evaluation is systematically unreliable, missing 44% of safety violations and 13% of robustness failures that our hybrid pipeline catches; (2) controlled error injection primarily degrades consistency rather than peak capability, with Pass^3 dropping up to 24% while Pass@3 remains stable; (3) multimodal performance varies sharply, with most models performing poorer on video than on document or image, and no single model dominating across all modalities. Beyond benchmarking, Claw-Eval highlights actionable directions for agent development, shedding light on what it takes to build agents that are not only capable but reliably deployable.",
-      "published_date": "Apr 7",
-      "github_url": "https://github.com/claw-eval/claw-eval",
-      "org_tag": "Claw-Eval"
+      "title": "QuanBench+: A Unified Multi-Framework Benchmark for LLM-Based Quantum Code Generation",
+      "url": "https://huggingface.co/papers/2604.08570",
+      "likes": 121,
+      "date": "2026-04-19",
+      "abstract": "Large Language Models(LLMs) are increasingly used for code generation, yetquantum code generationis still evaluated mostly within single frameworks, making it difficult to separate quantum reasoning from framework familiarity. We introduce QuanBench+, a unified benchmark spanningQiskit,PennyLane, andCirq, with 42 aligned tasks covering quantum algorithms, gate decomposition, and state preparation.\n  We evaluate models with executablefunctional tests, reportPass@1andPass@5, and useKL-divergence-based acceptance for probabilistic outputs. We additionally studyPass@1afterfeedback-based repair, where a model may revise code after a runtime error or wrong answer. Across frameworks, the strongest one-shot scores reach 59.5% inQiskit, 54.8% inCirq, and 42.9% inPennyLane; withfeedback-based repair, the best scores rise to 83.3%, 76.2%, and 66.7%, respectively. These results show clear progress, but also that reliable multi-frameworkquantum code generationremains unsolved and still depends strongly on framework-specific knowledge.",
+      "published_date": "Mar 25",
+      "github_url": "https://github.com/JawadKotaichh/quanbench-plus",
+      "org_tag": "American University of Beirut"
     },
     {
-      "title": "When Numbers Speak: Aligning Textual Numerals and Visual Instances in Text-to-Video Diffusion Models",
-      "url": "https://huggingface.co/papers/2604.08546",
+      "title": "GameWorld: Towards Standardized and Verifiable Evaluation of Multimodal Game Agents",
+      "url": "https://huggingface.co/papers/2604.07429",
       "likes": 109,
-      "date": "2026-04-13",
-      "abstract": "Text-to-video diffusion modelshave enabled open-ended video synthesis, but often struggle with generating the correct number of objects specified in a prompt. We introduce NUMINA , a training-free identify-then-guide framework for improvednumerical alignment. NUMINA identifiesprompt-layout inconsistenciesby selecting discriminative self- andcross-attention headsto derive a countablelatent layout. It then refines this layout conservatively and modulates cross-attention to guide regeneration. On the introducedCountBench, NUMINA improves counting accuracy by up to 7.4% on Wan2.1-1.3B, and by 4.9% and 5.5% on 5B and 14B models, respectively. Furthermore,CLIP alignmentis improved while maintainingtemporal consistency. These results demonstrate that structural guidance complements seed search and prompt enhancement, offering a practical path toward count-accurate text-to-video diffusion. The code is available at https://github.com/H-EmbodVis/NUMINA.",
-      "published_date": "Apr 9",
-      "github_url": "https://github.com/H-EmbodVis/NUMINA",
-      "org_tag": "H-EmbodVis"
-    },
-    {
-      "title": "TriAttention: Efficient Long Reasoning with Trigonometric KV Compression",
-      "url": "https://huggingface.co/papers/2604.04921",
-      "likes": 103,
-      "date": "2026-04-13",
-      "abstract": "Extended reasoning in large language models (LLMs) creates severe KV cache memory bottlenecks. LeadingKV cache compressionmethods estimate KV importance usingattention scoresfrom recent post-RoPEqueries. However, queries rotate with position duringRoPE, making representative queries very few, leading to poor top-key selection and unstable reasoning. To avoid this issue, we turn to thepre-RoPE space, where we observe that Q and K vectors are highly concentrated around fixed non-zero centers and remain stable across positions --Q/K concentration. We show that this concentration causes queries to preferentially attend to keys at specific distances (e.g., nearest keys), with the centers determining which distances are preferred via atrigonometric series. Based on this, we propose TriAttention to estimate key importance by leveraging these centers. Via thetrigonometric series, we use the distance preference characterized by these centers to score keys according to their positions, and also leverage Q/K norms as an additional signal for importance estimation. On AIME25 with 32K-token generation, TriAttention matches Full Attention reasoning accuracy while achieving 2.5x higher throughput or 10.7x KVmemory reduction, whereas leading baselines achieve only about half the accuracy at the same efficiency. TriAttention enables OpenClaw deployment on a single consumer GPU, where long context would otherwise cause out-of-memory with Full Attention.",
-      "published_date": "Apr 6",
-      "github_url": "https://github.com/WeianMao/triattention",
-      "org_tag": "NVIDIA"
-    },
-    {
-      "title": "MegaStyle: Constructing Diverse and Scalable Style Dataset via Consistent Text-to-Image Style Mapping",
-      "url": "https://huggingface.co/papers/2604.08364",
-      "likes": 92,
-      "date": "2026-04-13",
-      "abstract": "In this paper, we introduce MegaStyle, a novel and scalable data curation pipeline that constructs an intra-style consistent, inter-style diverse and high-qualitystyle dataset. We achieve this by leveraging the consistent text-to-image style mapping capability of currentlarge generative models, which can generate images in the same style from a given style description. Building on this foundation, we curate a diverse and balanced prompt gallery with 170K style prompts and 400K content prompts, and generate a large-scalestyle datasetMegaStyle-1.4M via content-style prompt combinations. With MegaStyle-1.4M, we propose style-supervisedcontrastive learningto fine-tune astyle encoderMegaStyle-Encoder for extracting expressive, style-specific representations, and we also train a FLUX-basedstyle transfermodel MegaStyle-FLUX. Extensive experiments demonstrate the importance of maintaining intra-style consistency, inter-style diversity and high-quality forstyle dataset, as well as the effectiveness of the proposed MegaStyle-1.4M. Moreover, when trained on MegaStyle-1.4M, MegaStyle-Encoder and MegaStyle-FLUX provide reliable style similarity measurement and generalizablestyle transfer, making a significant contribution to thestyle transfercommunity. More results are available at our project website https://jeoyal.github.io/MegaStyle/.",
-      "published_date": "Apr 9",
-      "github_url": null,
-      "org_tag": "Tencent"
-    },
-    {
-      "title": "LIBERO-Para: A Diagnostic Benchmark and Metrics for Paraphrase Robustness in VLA Models",
-      "url": "https://huggingface.co/papers/2603.28301",
-      "likes": 81,
-      "date": "2026-04-13",
-      "abstract": "Vision-Language-Action (VLA) models achieve strong performance in robotic manipulation by leveraging pre-trained vision-language backbones. However, in downstream robotic settings, they are typicallyfine-tunedwith limited data, leading to overfitting to specific instruction formulations and leaving robustness to paraphrased instructions underexplored. To study this gap, we introduce LIBERO-Para, a controlled benchmark that independently varies action expressions and object references for fine-grained analysis oflinguistic generalization. Across seven VLA configurations (0.6B-7.5B), we observe consistent performance degradation of 22-52 pp underparaphrasing. This degradation is primarily driven by object-level lexical variation: even simple synonym substitutions cause large drops, indicating reliance on surface-level matching rather thansemantic grounding. Moreover, 80-96% of failures arise from planning-leveltrajectory divergencerather than execution errors, showing thatparaphrasingdisrupts task identification.Binary success ratetreats all paraphrases equally, obscuring whether models perform consistently across difficulty levels or rely on easier cases. To address this, we propose PRIDE, a metric that quantifies paraphrase difficulty using semantic and syntactic factors. Our benchmark and corresponding code are available at: https://github.com/cau-hai-lab/LIBERO-Para",
-      "published_date": "Mar 30",
-      "github_url": "https://github.com/cau-hai-lab/LIBERO-Para",
-      "org_tag": "Human-centered AI Laboratory"
-    },
-    {
-      "title": "A Simple Baseline for Streaming Video Understanding",
-      "url": "https://huggingface.co/papers/2604.02317",
-      "likes": 72,
-      "date": "2026-04-13",
-      "abstract": "Recentstreaming video understandingmethods increasingly rely on complexmemory mechanismsto handle long video streams. We challenge this trend with a simple finding: asliding-window baselinethat feeds only the most recent N frames to an off-the-shelf VLM already matches or surpasses published streaming models. We formalize this baseline as SimpleStream and evaluate it against 13 major offline and onlinevideo LLMbaselines onOVO-BenchandStreamingBench. Despite its simplicity, SimpleStream delivers consistently strong performance. With only 4 recent frames, it reaches 67.7% average accuracy onOVO-Benchand 80.59% onStreamingBench. Controlled ablations further show that the value of longer context is backbone-dependent rather than uniformly increasing with model scale, and reveal a consistentperception-memory trade-off: adding more historical context can improve recall, but often weakens real-time perception. This suggests that stronger memory, retrieval, or compression modules should not be taken as evidence of progress unless they clearly outperform SimpleStream under the same protocol. We therefore argue that future streaming benchmarks should separate recent-scene perception from long-range memory, so that performance improvements from added complexity can be evaluated more clearly.",
-      "published_date": "Apr 2",
-      "github_url": "https://github.com/EvolvingLMMs-Lab/SimpleStream",
-      "org_tag": "LMMs-Lab"
-    },
-    {
-      "title": "Learning to Retrieve from Agent Trajectories",
-      "url": "https://huggingface.co/papers/2604.04949",
-      "likes": 67,
-      "date": "2026-04-13",
-      "abstract": "Information retrieval (IR) systems have traditionally been designed and trained for human users, withlearning-to-rankmethods relying heavily on large-scale human interaction logs such as clicks and dwell time. With the rapid emergence of large language model (LLM) poweredsearch agents, however, retrieval is increasingly consumed by agents rather than human beings, and is embedded as a core component within multi-turn reasoning and action loops. In this setting,retrieval modelstrained under human-centric assumptions exhibit a fundamental mismatch with the way agents issue queries and consume results. In this work, we argue thatretrieval modelsfor agentic search should be trained directly from agent interaction data. We introduce learning to retrieve fromagent trajectoriesas a new training paradigm, where supervision is derived from multi-step agent interactions. Through a systematic analysis of searchagent trajectories, we identify key behavioral signals that reveal document utility, including browsing actions, unbrowsed rejections, and post-browse reasoning traces. Guided by these insights, we propose LRAT, a simple yet effective framework that mines high-quality retrieval supervision fromagent trajectoriesand incorporatesrelevance intensitythroughweighted optimization. Extensive experiments on both in-domain and out-of-domain deep research benchmarks demonstrate that retrievers trained with LRAT consistently improveevidence recall, end-to-endtask success, andexecution efficiencyacross diverse agent architectures and scales. Our results highlightagent trajectoriesas a practical and scalable supervision source, pointing to a promising direction for retrieval in the era of agentic search.",
-      "published_date": "Mar 30",
-      "github_url": "https://github.com/Yuqi-Zhou/LRAT",
-      "org_tag": "RUC-GSAI-IIRLab"
-    },
-    {
-      "title": "Think in Strokes, Not Pixels: Process-Driven Image Generation via Interleaved Reasoning",
-      "url": "https://huggingface.co/papers/2604.04746",
-      "likes": 65,
-      "date": "2026-04-13",
-      "abstract": "Humans paint images incrementally: they plan a global layout, sketch a coarse draft, inspect, and refine details, and most importantly, each step is grounded in the evolving visual states. However, can unified multimodal models trained on text-image interleaved datasets also imagine the chain of intermediate states? In this paper, we introduce process-driven image generation, a multi-step paradigm that decomposes synthesis into an interleaved reasoning trajectory of thoughts and actions. Rather than generating images in a single step, our approach unfolds across multiple iterations, each consisting of 4 stages:textual planning,visual drafting,textual reflection, andvisual refinement. The textual reasoning explicitly conditions how the visual state should evolve, while the generated visual intermediate in turn constrains and grounds the next round of textual reasoning. A core challenge of process-driven generation stems from the ambiguity of intermediate states: how can models evaluate each partially-complete image? We address this through dense,step-wise supervisionthat maintains two complementary constraints: for the visual intermediate states, we enforce the spatial andsemantic consistency; for the textual intermediate states, we preserve the prior visual knowledge while enabling the model to identify and correctprompt-violating elements. This makes the generation process explicit, interpretable, and directly supervisable. To validate proposed method, we conduct experiments under various text-to-image generation benchmarks.",
+      "date": "2026-04-19",
+      "abstract": "Towards an embodied generalist for real-world interaction,Multimodal Large Language Model(MLLM) agents still suffer from challenging latency, sparse feedback, and irreversible mistakes.Video gamesoffer an ideal testbed with rich visual observations and closed-loop interaction, demanding fine-grained perception, long-horizon planning, and precise control. However, systematically evaluating these capabilities is currently hindered by heterogeneousaction interfacesand heuristic verification. To this end, we introduce GameWorld, a benchmark designed for standardized and verifiable evaluation of MLLMs as generalist game agents inbrowser environments. Twogame agent interfacesare studied: (i)computer-use agentsthat directly emit keyboard and mouse controls, and (ii) generalist multimodal agents that act in asemantic action spacevia deterministicSemantic Action Parsing. GameWorld contains 34 diverse games and 170 tasks, each paired withstate-verifiable metricsfor outcome-based evaluation. The results across 18 model-interface pairs suggest that even the best performing agent is far from achieving human capabilities onvideo games. Extensive experiments of repeated full-benchmark reruns demonstrate the robustness of the benchmark, while further studies on real-time interaction, context-memory sensitivity, and action validity expose more challenges ahead for game agents. Together, by offering a standardized, verifiable, and reproducible evaluation framework, GameWorld lays a robust foundation for advancing research on multimodal game agents and beyond. The project page is at https://gameworld-bench.github.io.",
       "published_date": "Apr 8",
-      "github_url": null,
-      "org_tag": "AI at Meta"
+      "github_url": "https://github.com/gameworld-project/gameworld",
+      "org_tag": "National University of Singapore"
     },
     {
-      "title": "RAGEN-2: Reasoning Collapse in Agentic RL",
-      "url": "https://huggingface.co/papers/2604.06268",
-      "likes": 57,
-      "date": "2026-04-13",
-      "abstract": "RL training of multi-turn LLM agents is inherently unstable, andreasoning qualitydirectly determinestask performance.Entropyis widely used to track reasoning stability. However,entropyonly measures diversity within the same input, and cannot tell whether reasoning actually responds to different inputs. In RAGEN-2, we find that even with stableentropy, models can rely on fixed templates that look diverse but are input-agnostic. We call thistemplate collapse, a failure mode invisible toentropyand all existing metrics. To diagnose this failure, we decomposereasoning qualityinto within-input diversity (Entropy) and cross-input distinguishability (Mutual Information, MI), and introduce a family ofmutual informationproxies for online diagnosis. Across diverse tasks,mutual informationcorrelates with final performance much more strongly thanentropy, making it a more reliable proxy forreasoning quality. We further explaintemplate collapsewith asignal-to-noise ratio(SNR) mechanism. Lowreward varianceweakens task gradients, letting regularization terms dominate and erase cross-input reasoning differences. To address this, we propose SNR-Aware Filtering to select high-signal prompts per iteration usingreward varianceas a lightweight proxy. Across planning, math reasoning, web navigation, and code execution, the method consistently improves bothinput dependenceandtask performance.",
-      "published_date": "Apr 7",
-      "github_url": "https://github.com/mll-lab-nu/RAGEN",
-      "org_tag": "MLL Lab"
+      "title": "RationalRewards: Reasoning Rewards Scale Visual Generation Both Training and Test Time",
+      "url": "https://huggingface.co/papers/2604.11626",
+      "likes": 99,
+      "date": "2026-04-19",
+      "abstract": "Mostreward modelsforvisual generationreduce rich human judgments to a single unexplained score, discarding the reasoning that underlies preference. We show that teachingreward modelsto produce explicit, multi-dimensional critiques before scoring transforms them from passive evaluators into active optimization tools, improving generators in two complementary ways: at training time, structured rationales provide interpretable, fine-grained rewards forreinforcement learning; at test time, aGenerate-Critique-Refine loopturns critiques into targeted prompt revisions that improve outputs without any parameter updates. To train such a reward model without costly rationale annotations, we introducePreference-Anchored Rationalization(PARROT), a principled framework that recovers high-quality rationales from readily available preference data through anchored generation, consistency filtering, and distillation. The resulting model, RationalRewards (8B), achieves state-of-the-artpreference predictionamong open-sourcereward models, competitive with Gemini-2.5-Pro, while using 10-20x less training data than comparable baselines. As an RL reward, it consistently improves text-to-image and image-editing generators beyond scalar alternatives. Most strikingly, its test-time critique-and-refine loop matches or exceedsRL-based fine-tuningon several benchmarks, suggesting thatstructured reasoningcan unlock latent capabilities in existing generators that suboptimal prompts fail to elicit.",
+      "published_date": "Apr 13",
+      "github_url": "https://github.com/TIGER-AI-Lab/RationalRewards",
+      "org_tag": null
+    },
+    {
+      "title": "KnowRL: Boosting LLM Reasoning via Reinforcement Learning with Minimal-Sufficient Knowledge Guidance",
+      "url": "https://huggingface.co/papers/2604.12627",
+      "likes": 96,
+      "date": "2026-04-19",
+      "abstract": "RLVR improvesreasoningin largelanguage models, but its effectiveness is often limited by severereward sparsityon hard problems. Recenthint-based RLmethods mitigate sparsity by injecting partial solutions or abstract templates, yet they typically scale guidance by adding more tokens, which introduce redundancy, inconsistency, and extra training overhead. We propose KnowRL (Knowledge-GuidedReinforcement Learning), an RL training framework that treats hint design as aminimal-sufficient guidanceproblem. During RL training, KnowRL decomposes guidance intoatomic knowledge points(KPs) and usesConstrained Subset Search(CSS) to construct compact, interaction-aware subsets for training. We further identify apruning interaction paradox-- removing one KP may help while removing multiple such KPs can hurt -- and explicitly optimize for robustsubset curationunder this dependency structure. We train KnowRL-Nemotron-1.5B from OpenMath-Nemotron-1.5B. Across eightreasoningbenchmarks at the 1.5B scale, KnowRL-Nemotron-1.5B consistently outperforms strong RL and hinting baselines. Without KP hints at inference, KnowRL-Nemotron-1.5B reaches 70.08 average accuracy, already surpassing Nemotron-1.5B by +9.63 points; with selected KPs, performance improves to 74.16, establishing a new state of the art at this scale. The model, curated training data, and code are publicly available at https://github.com/Hasuer/KnowRL.",
+      "published_date": "Apr 14",
+      "github_url": "https://github.com/Hasuer/KnowRL",
+      "org_tag": "Tianjin University"
+    },
+    {
+      "title": "FORGE:Fine-grained Multimodal Evaluation for Manufacturing Scenarios",
+      "url": "https://huggingface.co/papers/2604.07413",
+      "likes": 93,
+      "date": "2026-04-19",
+      "abstract": "The manufacturing sector is increasingly adoptingMultimodal Large Language Models(MLLMs) to transition from simple perception to autonomous execution, yet current evaluations fail to reflect the rigorous demands of real-world manufacturing environments. Progress is hindered by data scarcity and a lack offine-grained domain semanticsin existing datasets. To bridge this gap, we introduce FORGE. Wefirst construct a high-quality multimodal dataset that combines real-world 2D images and 3D point clouds, annotated withfine-grained domain semantics(e.g., exact model numbers). We then evaluate 18 state-of-the-art MLLMs across three manufacturing tasks, namelyworkpiece verification,structural surface inspection, andassembly verification, revealing significant performance gaps. Counter to conventional understanding, the bottleneck analysis shows thatvisual groundingis not the primary limiting factor. Instead, insufficientdomain-specific knowledgeis the key bottleneck, setting a clear direction for future research. Beyond evaluation, we show that our structured annotations can serve as an actionable training resource:supervised fine-tuningof a compact3B-parameter modelon our data yields up to 90.8% relative improvement in accuracy on held-out manufacturing scenarios, providing preliminary evidence for a practical pathway toward domain-adapted manufacturing MLLMs. The code and datasets are available at https://ai4manufacturing.github.io/forge-web.",
+      "published_date": "Apr 8",
+      "github_url": "https://github.com/AI4Manufacturing/FORGE",
+      "org_tag": "University of Waterloo"
+    },
+    {
+      "title": "HY-World 2.0: A Multi-Modal World Model for Reconstructing, Generating, and Simulating 3D Worlds",
+      "url": "https://huggingface.co/papers/2604.14268",
+      "likes": 80,
+      "date": "2026-04-19",
+      "abstract": "We introduce HY-World 2.0, amulti-modal world modelframework that advances our prior project HY-World 1.0. HY-World 2.0 accommodates diverse input modalities, including text prompts, single-view images, multi-view images, and videos, and produces3D world representations. With text or single-view image inputs, the model performs world generation, synthesizing high-fidelity, navigable3D Gaussian Splatting(3DGS) scenes. This is achieved through a four-stage method: a) Panorama Generation withHY-Pano 2.0, b) Trajectory Planning withWorldNav, c) World Expansion withWorldStereo 2.0, and d) World Composition withWorldMirror 2.0. Specifically, we introduce key innovations to enhance panorama fidelity, enable 3D scene understanding and planning, and upgrade WorldStereo, ourkeyframe-based view generationmodel with consistent memory. We also upgrade WorldMirror, afeed-forward modelfor universal 3D prediction, by refining model architecture and learning strategy, enabling world reconstruction from multi-view images or videos. Also, we introduce WorldLens, a high-performance 3DGSrendering platformfeaturing a flexible engine-agnostic architecture, automatic IBL lighting, efficient collision detection, and training-rendering co-design, enablinginteractive explorationof 3D worlds with character support. Extensive experiments demonstrate that HY-World 2.0 achieves state-of-the-art performance on several benchmarks among open-source approaches, delivering results comparable to the closed-source model Marble. We release all model weights, code, and technical details to facilitate reproducibility and support further research on 3D world models.",
+      "published_date": "Apr 15",
+      "github_url": "https://github.com/Tencent-Hunyuan/HY-World-2.0",
+      "org_tag": "🤗prithivMLmods/HY-World-2.0-Demo"
+    },
+    {
+      "title": "Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe",
+      "url": "https://huggingface.co/papers/2604.13016",
+      "likes": 77,
+      "date": "2026-04-19",
+      "abstract": "On-policy distillation(OPD) has become a core technique in the post-training oflarge language models, yet its training dynamics remain poorly understood. This paper provides a systematic investigation of OPD dynamics and mechanisms. We first identify that two conditions govern whether OPD succeeds or fails: (i) the student and teacher should share compatible thinking patterns; and (ii) even with consistent thinking patterns and higher scores, the teacher must offer genuinely new capabilities beyond what the student has seen during training. We validate these findings throughweak-to-strong reverse distillation, showing that same-family 1.5B and 7B teachers are distributionally indistinguishable from the student's perspective. Probing into thetoken-level mechanism, we show that successful OPD is characterized by progressive alignment onhigh-probability tokensat student-visited states, a small shared token set that concentrates most of the probability mass (97%-99%). We further propose two practical strategies to recover failing OPD: off-policy cold start and teacher-aligned prompt selection. Finally, we show that OPD's apparent free lunch of densetoken-level rewardcomes at a cost, raising the question of whether OPD can scale tolong-horizon distillation.",
+      "published_date": "Apr 14",
+      "github_url": "https://github.com/thunlp/OPD",
+      "org_tag": "Tsinghua NLP Group"
+    },
+    {
+      "title": "Attention Sink in Transformers: A Survey on Utilization, Interpretation, and Mitigation",
+      "url": "https://huggingface.co/papers/2604.10098",
+      "likes": 74,
+      "date": "2026-04-19",
+      "abstract": "As the foundational architecture of modern machine learning,Transformershave driven remarkable progress across diverse AI domains. Despite their transformative impact, a persistent challenge across variousTransformersisAttention Sink(AS), in which a disproportionate amount of attention is focused on a small subset of specific yet uninformative tokens. AS complicatesinterpretability, significantly affecting the training andinference dynamics, and exacerbates issues such ashallucinations. In recent years, substantial research has been dedicated to understanding and harnessing AS. However, a comprehensive survey that systematically consolidates AS-related research and offers guidance for future advancements remains lacking. To address this gap, we present the first survey on AS, structured around three key dimensions that define the current research landscape: Fundamental Utilization,Mechanistic Interpretation, andStrategic Mitigation. Our work provides a pivotal contribution by clarifying key concepts and guiding researchers through the evolution and trends of the field. We envision this survey as a definitive resource, empowering researchers and practitioners to effectively manage AS within the current Transformer paradigm, while simultaneously inspiring innovative advancements for the next generation ofTransformers. The paper list of this work is available at https://github.com/ZunhaiSu/Awesome-Attention-Sink.",
+      "published_date": "Apr 11",
+      "github_url": "https://github.com/ZunhaiSu/Awesome-Attention-Sink",
+      "org_tag": "LongCat"
+    },
+    {
+      "title": "OmniShow: Unifying Multimodal Conditions for Human-Object Interaction Video Generation",
+      "url": "https://huggingface.co/papers/2604.11804",
+      "likes": 69,
+      "date": "2026-04-19",
+      "abstract": "In this work, we studyHuman-Object Interaction Video Generation(HOIVG), which aims to synthesize high-quality human-object interaction videos conditioned on text, reference images, audio, and pose. This task holds significant practical value for automating content creation in real-world applications, such as e-commerce demonstrations, short video production, and interactive entertainment. However, existing approaches fail to accommodate all these requisite conditions. We present OmniShow, anend-to-end frameworktailored for this practical yet challenging task, capable of harmonizingmultimodal conditionsand delivering industry-grade performance. To overcome the trade-off between controllability and quality, we introduceUnified Channel-wise Conditioningfor efficient image and pose injection, andGated Local-Context Attentionto ensure precise audio-visual synchronization. To effectively address data scarcity, we develop aDecoupled-Then-Joint Trainingstrategy that leverages a multi-stage training process withmodel mergingto efficiently harness heterogeneous sub-task datasets. Furthermore, to fill the evaluation gap in this field, we establishHOIVG-Bench, a dedicated and comprehensive benchmark for HOIVG. Extensive experiments demonstrate that OmniShow achieves overall state-of-the-art performance across various multimodal conditioning settings, setting a solid standard for the emerging HOIVG task.",
+      "published_date": "Apr 13",
+      "github_url": "https://github.com/Correr-Zhou/OmniShow",
+      "org_tag": "ByteDance"
+    },
+    {
+      "title": "EXAONE 4.5 Technical Report",
+      "url": "https://huggingface.co/papers/2604.08644",
+      "likes": 62,
+      "date": "2026-04-19",
+      "abstract": "This technical report introduces EXAONE 4.5, the first open-weightvision language modelreleased by LG AI Research. EXAONE 4.5 is architected by integrating a dedicatedvisual encoderinto the existing EXAONE 4.0 framework, enabling nativemultimodal pretrainingover both visual and textual modalities. The model is trained on large-scale data with careful curation, particularly emphasizingdocument-centric corporathat align with LG's strategic application domains. This targeted data design enables substantial performance gains indocument understandingand related tasks, while also delivering broad improvements across general language capabilities. EXAONE 4.5 extendscontext lengthup to 256K tokens, facilitatinglong-context reasoningand enterprise-scale use cases. Comparative evaluations demonstrate that EXAONE 4.5 achieves competitive performance ingeneral benchmarkswhile outperforming state-of-the-art models of similar scale indocument understandingandKorean contextual reasoning. As part of LG's ongoing effort toward practical industrial deployment, EXAONE 4.5 is designed to be continuously extended with additional domains and application scenarios to advance AI for a better life.",
+      "published_date": "Apr 9",
+      "github_url": "https://github.com/LG-AI-EXAONE/EXAONE-4.5",
+      "org_tag": null
+    },
+    {
+      "title": "SpatialEvo: Self-Evolving Spatial Intelligence via Deterministic Geometric Environments",
+      "url": "https://huggingface.co/papers/2604.14144",
+      "likes": 61,
+      "date": "2026-04-19",
+      "abstract": "Spatial reasoning over three-dimensional scenes is a core capability for embodied intelligence, yet continuous model improvement remains bottlenecked by the cost of geometric annotation. Theself-evolving paradigmoffers a promising path, but its reliance on model consensus to constructpseudo-labelscauses training to reinforce rather than correct the model's own geometric errors. We identify a property unique to3D spatial reasoningthat circumvents this limitation: ground truth is a deterministic consequence of the underlying geometry, computable exactly frompoint cloudsandcamera poseswithout any model involvement. Building on this insight, we present SpatialEvo, a self-evolving framework for3D spatial reasoning, centered on theDeterministic Geometric Environment(DGE). TheDGEformalizes 16 spatial reasoning task categories under explicit geometric validation rules and converts unannotated 3D scenes into zero-noiseinteractive oracles, replacing model consensus with objective physical feedback. A singleshared-parameter policyco-evolves across questioner and solver roles underDGEconstraints: the questioner generates physically valid spatial questions grounded in scene observations, while the solver derives precise answers againstDGE-verified ground truth. Atask-adaptive schedulerendogenously concentrates training on the model's weakest categories, producing adynamic curriculumwithout manual design. Experiments across nine benchmarks demonstrate that SpatialEvo achieves the highest average score at both 3B and 7B scales, with consistent gains on spatial reasoning benchmarks and no degradation on general visual understanding.",
+      "published_date": "Apr 15",
+      "github_url": "https://github.com/ZJU-REAL/SpatialEvo",
+      "org_tag": null
+    },
+    {
+      "title": "OccuBench: Evaluating AI Agents on Real-World Professional Tasks via Language World Models",
+      "url": "https://huggingface.co/papers/2604.10866",
+      "likes": 58,
+      "date": "2026-04-19",
+      "abstract": "AI agents are expected to perform professional work across hundreds of occupational domains (from emergency department triage to nuclear reactor safety monitoring to customs import processing), yet existing benchmarks can only evaluate agents in the few domains where public environments exist. We introduce OccuBench, a benchmark covering 100 real-world professional task scenarios across 10 industry categories and 65 specialized domains, enabled byLanguage World Models(LWMs) that simulate domain-specific environments through LLM-driven tool response generation. Ourmulti-agent synthesis pipelineautomatically produces evaluation instances with guaranteed solvability, calibrated difficulty, and document-grounded diversity. OccuBench evaluates agents along two complementary dimensions:task completionacross professional domains andenvironmental robustnessunder controlledfault injection(explicit errors, implicit data degradation, andmixed faults). We evaluate 15 frontier models across 8 model families and find that: (1) no single model dominates all industries, as each has a distinct occupational capability profile; (2)implicit faults(truncated data, missing fields) are harder than bothexplicit errors(timeouts, 500s) andmixed faults, because they lack overt error signals and require the agent to independently detect data degradation; (3) larger models, newer generations, and higherreasoning effortconsistently improve performance. GPT-5.2 improves by 27.5 points from minimal to maximumreasoning effort; and (4) strong agents are not necessarily strong environment simulators.Simulator qualityis critical for LWM-based evaluation reliability. OccuBench provides the first systematic cross-industry evaluation of AI agents on professional occupational tasks.",
+      "published_date": "Apr 13",
+      "github_url": "https://github.com/GregxmHu/OccuBench",
+      "org_tag": "Qwen"
+    },
+    {
+      "title": "Strips as Tokens: Artist Mesh Generation with Native UV Segmentation",
+      "url": "https://huggingface.co/papers/2604.09132",
+      "likes": 50,
+      "date": "2026-04-19",
+      "abstract": "Recent advancements inautoregressive transformershave demonstrated remarkable potential for generating artist-quality meshes. However, thetoken ordering strategiesemployed by existing methods typically fail to meet professional artist standards, where coordinate-based sorting yields inefficiently long sequences, and patch-based heuristics disrupt the continuous edge flow and structural regularity essential for high-quality modeling. To address these limitations, we propose Strips as Tokens (SATO), a novel framework with a token ordering strategy inspired bytriangle strips. By constructing the sequence as a connected chain of faces that explicitly encodesUV boundaries, our method naturally preserves the organized edge flow and semantic layout characteristic of artist-created meshes. A key advantage of this formulation is its unified representation, enabling the same token sequence to be decoded into either a triangle or quadrilateral mesh. This flexibility facilitates joint training on both data types: large-scale triangle data provides fundamental structural priors, while high-quality quad data enhances the geometric regularity of the outputs. Extensive experiments demonstrate that SATO consistently outperforms prior methods in terms ofgeometric quality,structural coherence, andUV segmentation.",
+      "published_date": "Apr 10",
+      "github_url": "https://github.com/Xrvitd/SATO",
+      "org_tag": "DEEMOS Technology"
+    },
+    {
+      "title": "Matrix-Game 3.0: Real-Time and Streaming Interactive World Model with Long-Horizon Memory",
+      "url": "https://huggingface.co/papers/2604.08995",
+      "likes": 46,
+      "date": "2026-04-19",
+      "abstract": "With the advancement of interactive video generation,diffusion modelshave increasingly demonstrated their potential asworld models. However, existing approaches still struggle to simultaneously achieve memory-enabledlong-term temporal consistencyand high-resolutionreal-time generation, limiting their applicability in real-world scenarios. To address this, we present Matrix-Game 3.0, a memory-augmented interactive world model designed for 720p real-time longform video generation. Building upon Matrix-Game 2.0, we introduce systematic improvements across data, model, and inference. First, we develop an upgraded industrial-scale infinite data engine that integrates Unreal Engine-based synthetic data, large-scale automated collection from AAA games, and real-world video augmentation to produce high-qualityVideo-Pose-Action-Promptquadruplet data at scale. Second, we propose a training framework for long-horizon consistency: by modelingprediction residualsand re-injecting imperfect generated frames during training, the base model learns self-correction; meanwhile,camera-aware memory retrievaland injection enable the base model to achieve long horizon spatiotemporal consistency. Third, we design a multi-segmentautoregressive distillationstrategy based onDistribution Matching Distillation(DMD), combined withmodel quantizationandVAE decoder pruning, to achieve efficient real-time inference. Experimental results show that Matrix-Game 3.0 achieves up to 40 FPSreal-time generationat 720p resolution with a 5B model, while maintaining stable memory consistency over minute-long sequences. Scaling up to a 2x14B model further improves generation quality, dynamics, and generalization. Our approach provides a practical pathway toward industrial-scale deployableworld models.",
+      "published_date": "Apr 10",
+      "github_url": null,
+      "org_tag": null
+    },
+    {
+      "title": "Uni-ViGU: Towards Unified Video Generation and Understanding via A Diffusion-Based Video Generator",
+      "url": "https://huggingface.co/papers/2604.08121",
+      "likes": 42,
+      "date": "2026-04-19",
+      "abstract": "Unifiedmultimodal modelsintegrating visual understanding and generation face a fundamental challenge: visual generation incurs substantially higher computational costs than understanding, particularly for video. This imbalance motivates us to invert the conventional paradigm: rather than extending understanding-centric MLLMs to support generation, we propose Uni-ViGU, a framework that unifiesvideo generationand understanding by extending a video generator as the foundation. We introduce aunified flow methodthat performscontinuous flow matchingfor video anddiscrete flow matchingfor text within a single process, enabling coherent multimodal generation. We further propose amodality-driven MoE-based framework that augmentsTransformer blockswith lightweight layers for text generation while preserving generative priors. To repurpose generation knowledge for understanding, we design abidirectional trainingmechanism with two stages:Knowledge Recallreconstructs input prompts to leverage learned text-video correspondences, whileCapability Refinementfine-tunes on detailed captions to establish discriminative shared representations. Experiments demonstrate that Uni-ViGU achieves competitive performance on bothvideo generationand understanding, validating generation-centric architectures as a scalable path toward unified multimodal intelligence. Project Page and Code: https://fr0zencrane.github.io/uni-vigu-page/.",
+      "published_date": "Apr 9",
+      "github_url": "https://github.com/Fr0zenCrane/Uni-ViGU",
+      "org_tag": null
+    },
+    {
+      "title": "Audio-Omni: Extending Multi-modal Understanding to Versatile Audio Generation and Editing",
+      "url": "https://huggingface.co/papers/2604.10708",
+      "likes": 40,
+      "date": "2026-04-19",
+      "abstract": "Recent progress in multimodal models has spurred rapid advances inaudio understanding, generation, and editing. However, these capabilities are typically addressed by specialized models, leaving the development of a truly unified framework that can seamlessly integrate all three tasks underexplored. While some pioneering works have explored unifyingaudio understandingand generation, they often remain confined to specific domains. To address this, we introduce Audio-Omni, the first end-to-end framework to unify generation and editing across general sound, music, and speech domains, with integrated multi-modal understanding capabilities. Our architecture synergizes a frozenMultimodal Large Language Modelfor high-level reasoning with a trainableDiffusion Transformerfor high-fidelity synthesis. To overcome the critical data scarcity inaudio editing, we constructAudioEdit, a newlarge-scale datasetcomprising over one million meticulously curated editing pairs. Extensive experiments demonstrate that Audio-Omni achieves state-of-the-art performance across a suite of benchmarks, outperforming prior unified approaches while achieving performance on par with or superior to specialized expert models. Beyond its core capabilities, Audio-Omni exhibits remarkable inherited capabilities, including knowledge-augmented reasoning generation, in-context generation, and zero-shot cross-lingual control foraudio generation, highlighting a promising direction towarduniversal generative audio intelligence. The code, model, and dataset will be publicly released on https://zeyuet.github.io/Audio-Omni.",
+      "published_date": "Apr 12",
+      "github_url": "https://github.com/ZeyueT/Audio-Omni",
+      "org_tag": "🎛️Zeyue7/Audio-Omni"
     }
   ]
 }
